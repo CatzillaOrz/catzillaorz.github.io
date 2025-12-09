@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      kyecloak权限控制策略 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Keycloak支持细粒度的授权策略，并可以对这些策略进一步组合"><span class="toc-text">Keycloak支持细粒度的授权策略，并可以对这些策略进一步组合</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#授权服务"><span class="toc-text">授权服务</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#授权服务端点发现和元数据"><span class="toc-text">授权服务端点发现和元数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#获取权限"><span class="toc-text">获取权限</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#User-Managed-Access"><span class="toc-text">User-Managed Access</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#保护API"><span class="toc-text">保护API</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#RPT"><span class="toc-text">RPT</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#授权客户端的Java-API"><span class="toc-text">授权客户端的Java API</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#策略执行器"><span class="toc-text">策略执行器</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">kyecloak权限控制策略</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/07/29</span>
+        </span>
+
+        
+
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/keycloak">keycloak</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="Keycloak支持细粒度的授权策略，并可以对这些策略进一步组合">Keycloak支持细粒度的授权策略，并可以对这些策略进一步组合<a class="post-anchor" href="#Keycloak支持细粒度的授权策略，并可以对这些策略进一步组合"></a></h5><ul>
+<li>基于属性（ABAC）</li>
+<li>基于角色（RBAC）</li>
+<li>基于用户（UBAC）</li>
+<li>基于上下文（CABC）</li>
+<li>基于规则（Rule-based）</li>
+<li>通过JavaScript</li>
+<li>使用Jboss Drools</li>
+<li>基于时间（Time-based）</li>
+<li>通过SPI自定义访问控制策略（ACM）</li>
+</ul>
+<p>Keycloak提供了一组管理界面和RESTful API，用于创建权限、关联权限与授权策略，以及在应用程序中执行授权决策。</p>
+<p>资源服务器通常执行的是基于角色的访问控制（RBAC）策略，即检查用户所拥有的角色是否关联了要访问的资源。虽然这种方式非常有用，但是它们也有一些限制：</p>
+<ul>
+<li>资源和角色紧耦合，角色的更改（如添加、删除或更改访问上下文）可能影响多个资源。</li>
+<li>基于RBAC的应用程序无法很好地响应安全性需求的调整。</li>
+<li>项目规模扩大时，复杂的角色管理会很困难而且容易出错。</li>
+<li>不够灵活。角色并不能有效代表用户身份，即缺乏上下文信息。客观上来说被授予了角色的用户，至少会拥有某些访问权限。</li>
+</ul>
+<p>当下的项目中，我们需要考虑不同地区、不同本地策略、使用不同设备、以及对信息共享有较高需求的异构环境。Keycloak授权服务可以通过以下方式帮助您提高应用程序和服务的授权能力：</p>
+<ul>
+<li>不同的访问控制机制以及细粒度的授权策略。</li>
+<li>中心化的资源、权限以及策略管理。</li>
+<li>中心化的策略决策。</li>
+<li>REST风格的授权服务。</li>
+<li>授权工作流以及用户访问管理。</li>
+<li>可作为快速响应您项目中安全需求的基础设施。</li>
+</ul>
+<hr>
+<h5 id="授权服务">授权服务<a class="post-anchor" href="#授权服务"></a></h5><p>Keycloak授权服务构建在已经广泛使用的标准上，比如OAuth2和UMA规范。OAuth2客户端（如前端应用程序）可以利用token endpoint从服务器获取Access Token，然后使用Access Token从资源服务器（例如后端服务）获取被保护的资源。Keycloak授权服务扩展了OAuth2，通过评估与被请求的资源或范围相关联的策略来发出Access Token。这意味着资源服务器可以基于含有权限Access Token来控制对资源的访问。在Keycloak授权服务中，这种具有权限的Access Token称为请求方令牌或简称RPT。除了发布RPTs之外，Keycloak授权服务还提供了一组RESTful端点，这些端点允许资源服务器管理它们受保护的资源、范围、权限和策略，帮助开发人员将这些功能集成到应用程序中，以支持细粒度授权。</p>
+<h6 id="授权服务端点发现和元数据">授权服务端点发现和元数据<a class="post-anchor" href="#授权服务端点发现和元数据"></a></h6><p>Keycloak提供了一个发现文档来帮助客户端获取与Keycloak授权服务交互所需的任何信息，包括端点位置和功能。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">curl -X GET \<br>  http://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/auth/realms/<span class="hljs-variable">${realm}</span>/.well-known/uma2-configuration<br></code></pre></td></tr></tbody></table></figure>
+
+<p>请将上面占位符中的变量替换为实际的值。</p>
+<ul>
+<li>token_endpoint</li>
+</ul>
+<p>遵循OAuth2的Token端点支持 urn:ietf:params:oauth:grant-type:uma-ticket 授权类型。客户端可以向此端点发送授权申请并获取Keycloak RPT。</p>
+<ul>
+<li>token_introspection_endpoint</li>
+</ul>
+<p>遵循Oauth2的Token检查端点。客户端可以使用该端点查询RPT的状态，并确定与token相关的任何其他信息，比如Keycloak授予的权限。</p>
+<ul>
+<li>resource_registration_endpoint</li>
+</ul>
+<p>遵循UMA协议的资源注册端点，资源服务器可以使用它来管理资源以及范围。此端点提供了资源、范围的创建、查询、更新以及删除等功能。</p>
+<ul>
+<li>permission_endpoint</li>
+</ul>
+<p>遵循UMA协议的权限管理端点，资源服务器可以用来管理权限tickets。提供了对permission ticket的创建、查询、更新以及删除等功能。</p>
+<h6 id="获取权限">获取权限<a class="post-anchor" href="#获取权限"></a></h6><ul>
+<li>客户端验证方式</li>
+<li>推送声明</li>
+</ul>
+<h6 id="User-Managed-Access">User-Managed Access<a class="post-anchor" href="#User-Managed-Access"></a></h6><ul>
+<li><p>Keycloak 授权服务是基于User-Managed Access的，我们简写为UMA。UMA协议在下面这些方面增强了OAuth2：</p>
+<ul>
+<li>隐私</li>
+<li>点对点授权</li>
+<li>资源共享</li>
+</ul>
+</li>
+<li><p>授权过程</p>
+</li>
+</ul>
+<p>在UMA中，授权过程开始于客户端试图访问受UMA保护的资源服务器时。</p>
+<p>受UMA保护的资源服务器会要求请求带有bearer token。下面模拟了不带权限ticket的请求：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">curl -X GET \<br>  http://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/my-resource-server/resource/1bfdfe78-a4e1-4c2d-b142-fc92b75b986f<br></code></pre></td></tr></tbody></table></figure>
+
+<p>资源服务器将一个响应发送回客户机，该响应带有一个权限ticket和一个as_uri参数，该as_uri表示Keycloak服务器的地址，客户端可以将ticket发送到此地址来获得RPT。</p>
+<p>下面是资源服务器的响应，注意响应中包含权限ticket：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">HTTP/1.1 401 Unauthorized<br>WWW-Authenticate: UMA realm=<span class="hljs-string">"<span class="hljs-variable">${realm}</span>"</span>,<br>    as_uri=<span class="hljs-string">"https://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/auth/realms/<span class="hljs-variable">${realm}</span>"</span>,<br>    ticket=<span class="hljs-string">"016f84e8-f9b9-11e0-bd6f-0021cc6004de"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>权限ticket是Keycloak权限API发放的一种特殊token。它们代表被申请的权限（如资源以及范围）以及其它请求中的关联信息。只有资源服务器可以创建它们。</p>
+<p>客户机已经拥有了权限ticket和Keycloak服务器的地址，就可以使用文档发现API来获取token endpoint的地址并发送授权请求。</p>
+<p>下面的例子展示了客户端向token endpoint请求RPT：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">curl -X POST \<br>  http://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/auth/realms/<span class="hljs-variable">${realm}</span>/protocol/openid-connect/token \<br>  -H <span class="hljs-string">"Authorization: Bearer <span class="hljs-variable">${access_token}</span>"</span> \<br>  --data <span class="hljs-string">"grant_type=urn:ietf:params:oauth:grant-type:uma-ticket"</span> \<br>  --data <span class="hljs-string">"ticket=<span class="hljs-variable">${permission_ticket}</span></span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>Keycloak评估通过后会发放权限相关的RPT：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">HTTP/1.1 200 OK<br>Content-Type: application/json<br>...<br>{<br>    <span class="hljs-string">"access_token"</span>: <span class="hljs-string">"<span class="hljs-variable">${rpt}</span>"</span>,<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>响应和其他授权类型的响应类似。RPT在access_token响应参数中，如果client没有通过授权服务端会返回403状态码：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">HTTP/1.1 403 Forbidden<br>Content-Type: application/json<br>...<br>{<br>    <span class="hljs-string">"error"</span>: <span class="hljs-string">"access_denied"</span>,<br>    <span class="hljs-string">"error_description"</span>: <span class="hljs-string">"request_denied"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>提交权限请求</li>
+</ul>
+<p>在整个授权过程中，客户端首先需要从受UMA保护的资源服务器获得一个权限ticket，以便在Keycloak的token端点用它来交换RPT。</p>
+<p>如果Keycloak判断客户端无法通过授权，会返回403及request_denied错误信息。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">HTTP/1.1 403 Forbidden<br>Content-Type: application/json<br>...<br>{<br>    <span class="hljs-string">"error"</span>: <span class="hljs-string">"access_denied"</span>,<br>    <span class="hljs-string">"error_description"</span>: <span class="hljs-string">"request_denied"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>上面的响应表示Keycloak不能对该权限ticket发放RPT。</p>
+<p>某些时候客户端会用到异步授权流程，并让被资源所有者来决定是否授权。为此，客户端可以在对token端点的请求中带上submit_request参数：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">curl -X POST \<br>  http://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/auth/realms/<span class="hljs-variable">${realm}</span>/protocol/openid-connect/token \<br>  -H <span class="hljs-string">"Authorization: Bearer <span class="hljs-variable">${access_token}</span>"</span> \<br>  --data <span class="hljs-string">"grant_type=urn:ietf:params:oauth:grant-type:uma-ticket"</span> \<br>  --data <span class="hljs-string">"ticket=<span class="hljs-variable">${permission_ticket}</span> \</span><br><span class="hljs-string">  --data "</span>submit_request=<span class="hljs-literal">true</span><span class="hljs-string">"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>当使用submit_request参数时，Keycloak会记录下每个被拒绝的权限申请。然后资源所有者就可以检查并管理这些它们。</p>
+<p>你可以将此功能视为APP中的请求访问按钮，用户可以向其他用户申请以访问他们的资源。</p>
+<ul>
+<li>管理对用户资源的访问</li>
+</ul>
+<h6 id="保护API">保护API<a class="post-anchor" href="#保护API"></a></h6><p>保护API遵循UMA提供了一系列端点：</p>
+<ul>
+<li>资源管理</li>
+<li>权限管理</li>
+<li>策略API</li>
+</ul>
+<p>Keycloak利用UMA保护API使资源服务器能够管理各自用户的权限。除了资源和权限API外，Keycloak还提供了策略API。可以让资源服务器代表其用户设置资源的权限。</p>
+<p>使用此API要求资源服务器拥有名为protection API token（PAT）的特殊OAuth2 access token。在UMA中，PAT是有着uma_protection范围的token。</p>
+<ul>
+<li>什么是PAT，如何获取它们？</li>
+</ul>
+<p>一个protection API token（PAT）是有着uma_protection范围的特殊token。创建资源服务器时Keycloak会自动创建uma_protection的角色，并将其与客户端的服务帐户关联起来。</p>
+<p>资源服务器可以像获取其他OAuth2 token那样从Keycloak获取PAT。下边是一个curl的例子：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">curl -X POST \<br>    -H <span class="hljs-string">"Content-Type: application/x-www-form-urlencoded"</span> \<br>    -d <span class="hljs-string">'grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}'</span> \<br>    <span class="hljs-string">"http://localhost:8080/auth/realms/<span class="hljs-variable">${realm_name}</span>/protocol/openid-connect/token"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>上面的示例使用client_credentials授权类型从服务器获取PAT。服务器返回的响应如下：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">{<br>  "access_token": ${PAT},<br>  "expires_in": 300,<br>  "refresh_expires_in": 1800,<br>  "refresh_token": ${refresh_token},<br>  "token_type": "bearer",<br>  "id_token": ${id_token},<br>  "not-before-policy": 0,<br>  "session_state": "ccea4a55-9aec-4024-b11c-44f6f168439e"<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Keycloak可以使用不同的方式来认证客户端应用。上面使用了 client_credentials 方式，它要求提供一个client_id和一个client_secret。你可以自由选择其它方式来认证。</p>
+<ul>
+<li>管理资源</li>
+</ul>
+<p>Keycloak提供了遵循UMA协议的端点来远程管理资源。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">http://<span class="hljs-variable">${host}</span>:<span class="hljs-variable">${port}</span>/auth/realms/<span class="hljs-variable">${realm_name}</span>/authz/protection/resource_set<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>管理权限申请</li>
+<li>使用策略API来管理资源权限</li>
+</ul>
+<h6 id="RPT">RPT<a class="post-anchor" href="#RPT"></a></h6><p>RPT是使用JSON web signature（JWS） 签发的JSON web token（JWT）。RPT基于之前由Keycloak发出的OAuth2 access token来构建，该token用于用户自身或代表用户的特定客户端。</p>
+<p>解码RPT可以看到它的payload如下：</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><code class="hljs json">{<br>  <span class="hljs-attr">"authorization"</span>: {<br>      <span class="hljs-attr">"permissions"</span>: [<br>        {<br>          <span class="hljs-attr">"resource_set_id"</span>: <span class="hljs-string">"d2fe9843-6462-4bfc-baba-b5787bb6e0e7"</span>,<br>          <span class="hljs-attr">"resource_set_name"</span>: <span class="hljs-string">"Hello World Resource"</span><br>        }<br>      ]<br>  },<br>  <span class="hljs-attr">"jti"</span>: <span class="hljs-string">"d6109a09-78fd-4998-bf89-95730dfd0892-1464906679405"</span>,<br>  <span class="hljs-attr">"exp"</span>: <span class="hljs-number">1464906971</span>,<br>  <span class="hljs-attr">"nbf"</span>: <span class="hljs-number">0</span>,<br>  <span class="hljs-attr">"iat"</span>: <span class="hljs-number">1464906671</span>,<br>  <span class="hljs-attr">"sub"</span>: <span class="hljs-string">"f1888f4d-5172-4359-be0c-af338505d86c"</span>,<br>  <span class="hljs-attr">"typ"</span>: <span class="hljs-string">"kc_ett"</span>,<br>  <span class="hljs-attr">"azp"</span>: <span class="hljs-string">"hello-world-authz-service"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>从此token中，你可以从服务器获取所有 permissions 声明的权限。</p>
+<p>注意，权限与要保护的资源/范围直接相关，并且完全与实际授予和发出这些权限的机制解耦。</p>
+<ul>
+<li>审视RPT</li>
+<li>获取RPT信息</li>
+<li>每次检视RPT时都需要调用服务端吗？</li>
+</ul>
+<h6 id="授权客户端的Java-API">授权客户端的Java API<a class="post-anchor" href="#授权客户端的Java-API"></a></h6><p>根据实际项目的需求，资源服务器客远程管理资源以及通过编程来检查权限。如果你正在使用Java，则可以使用授权客户端API来访问Keycloak授权服务。</p>
+<p>Keycloak针对资源服务器的不同需求，提供了不同端点（如token端点、资源端点和权限管理端点）。</p>
+<ul>
+<li>Maven依赖</li>
+<li>配置</li>
+<li>创建授权客户端</li>
+<li>获取用户授权</li>
+<li>使用保护API来创建资源</li>
+<li>检查RPT</li>
+</ul>
+<h6 id="策略执行器">策略执行器<a class="post-anchor" href="#策略执行器"></a></h6><ul>
+<li><p>配置</p>
+</li>
+<li><p>声明信息点</p>
+<ul>
+<li>从HTTP请求中获取信息</li>
+<li>从外部HTTP服务获取信息</li>
+<li>静态声明</li>
+<li>Cliam Informatica Provider 的SPI</li>
+</ul>
+</li>
+<li><p>获取授权上下文</p>
+</li>
+<li><p>使用AuthorizationContext获取授权客户端实例</p>
+</li>
+<li><p>JavaScript集成</p>
+<ul>
+<li>处理来自UMA保护的资源服务器的授权响应</li>
+<li>获取权限</li>
+<li>授权请求</li>
+<li>获取RPT</li>
+</ul>
+</li>
+<li><p>设置TLS/HTTPS</p>
+</li>
+</ul>
+<blockquote>
+<ol>
+<li><p><a href="https://juejin.im/post/6844904202033086477#heading-47" target="_blank" rel="noopener">keycloak授权</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/6844904202041294862#heading-2" target="_blank" rel="noopener">keycloak授权</a></p>
+</li>
+</ol>
+</blockquote>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/12/12/%E4%BD%A0%E7%9A%84%E5%AE%B9%E5%99%A8%E9%9C%80%E8%A6%81%E8%AF%8A%E6%96%AD/">你的容器需要诊断</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/07/14/%E5%90%89%E4%BB%96%E4%B9%90%E7%90%86%E5%9B%9B-%E5%A4%A7%E8%B0%83%E5%92%8C%E5%BC%A6/">Guitar Music Theory Four - Major Chords</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/07/29/kyecloak%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/">http://catzillaorz.github.io/2020/07/29/kyecloak%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

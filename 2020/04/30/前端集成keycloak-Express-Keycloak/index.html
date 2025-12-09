@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      前端集成keycloak-Express+Keycloak - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Keycloak"><span class="toc-text">Keycloak</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Express-Keycloak-前端应用场景"><span class="toc-text">Express + Keycloak 前端应用场景</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Keycloak-node-adapter-Usage"><span class="toc-text">Keycloak node adapter Usage</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Express中间件"><span class="toc-text">Express中间件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Read-more"><span class="toc-text">Read more</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">前端集成keycloak-Express+Keycloak</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/04/30</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Frontend">Frontend</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/keycloak">keycloak</a>
+                  
+                
+                  
+                    <a href="/tags/sso">sso</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <h5 id="Keycloak"><a href="#Keycloak" class="headerlink" title="Keycloak"></a>Keycloak</h5><p>Keycloak是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至2018年3月，红帽公司负责管理这一JBoss社区项目，并将其作为他们RH-SSO产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。</p>
+<h6 id="Express-Keycloak-前端应用场景"><a href="#Express-Keycloak-前端应用场景" class="headerlink" title="Express + Keycloak 前端应用场景"></a>Express + Keycloak 前端应用场景</h6><ul>
+<li>Resource-Based Authorization</li>
+</ul>
+<blockquote>
+<ol>
+<li>Resource-Based Authorization allows you to protect resources, and their specific methods/actions,<em>* based on a set of policies defined in Keycloak, thus externalizing authorization from your application. This is achieved by exposing a <code>keycloak.enforcer</code> method which you can use to protect resources.</em></li>
+</ol>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​app.get(<span class="hljs-string">'/apis/me'</span>, keycloak.enforcer(<span class="hljs-string">'user:profile'</span>), userProfileHandler)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>The keycloak-enforcer method operates in two modes, depending on the value of the <code>response_mode</code> configuration option.</li>
+</ol>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​app.get(<span class="hljs-string">'/apis/me'</span>, keycloak.enforcer(<span class="hljs-string">'user:profile'</span>, &#123;<span class="hljs-attr">response_mode</span>: <span class="hljs-string">'token'</span>&#125;), userProfileHandler)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>If <code>response_mode</code> is set to <code>token</code>, permissions are obtained from the server on behalf of the subject represented by the bearer token that was sent to your application. In this case, a new access token is issued by Keycloak with the permissions granted by the server. If the server did not respond with a token with the expected permissions, the request is denied. When using this mode, you should be able to obtain the token from the request as follows:</li>
+</ol>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​   app.get(<span class="hljs-string">'/apis/me'</span>, keycloak.enforcer(<span class="hljs-string">'user:profile'</span>, &#123;<span class="hljs-attr">response_mode</span>: <span class="hljs-string">'token'</span>&#125;), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;<br>       ​<span class="hljs-keyword">var</span> token = <span class="hljs-keyword">var</span> token = req.kauth.grant.access_token.content;<br>       ​<span class="hljs-keyword">var</span> permissions = token.authorization ? token.authorization.permissions : <span class="hljs-literal">undefined</span>;<br><br>       ​<span class="hljs-comment">// show user profile</span><br>   ​&#125;)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>Prefer this mode when your application is using sessions and you want to cache previous decisions from the server, as well automatically handle refresh tokens. This mode is especially useful for applications acting as a client and resource server.</li>
+</ol>
+<p>If <code>response_mode</code> is set to <code>permissions</code> (default mode), the server only returns the list of granted permissions, without issuing a new access token. In addition to not issuing a new token, this method exposes the permissions granted by the server through the <code>request</code> as follows:</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"> app.get(<span class="hljs-string">'/apis/me'</span>, keycloak.enforcer(<span class="hljs-string">'user:profile'</span>, &#123;<span class="hljs-attr">response_mode</span>: <span class="hljs-string">'token'</span>&#125;), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;<br>    ​<span class="hljs-keyword">var</span> permissions = req.permissions;<br><br>    ​<span class="hljs-comment">// show user profile</span><br>​&#125;)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>Regardless of the response_mode in use, the keycloak.enforcer method will first try to check the permissions within the bearer token that was sent to your application. If the bearer token already carries the expected permissions, there is no need to interact with the server to obtain a decision. This is specially useful when your clients are capable of obtaining access tokens from the server with the expected permissions before accessing a protected resource, so they can use some capabilities provided by Keycloak Authorization Services such as incremental authorization and avoid additional requests to the server when keycloak.enforcer is enforcing access to the resource.</li>
+</ol>
+<p>By default, the policy enforcer will use the client_id defined to the application (for instance, via keycloak.json) to reference a client in Keycloak that supports Keycloak Authorization Services. In this case, the client can not be public given that it is actually a resource server.</p>
+<p>If your application is acting as both a public client(<code>frontend</code>) and resource server(backend), you can use the following configuration to reference a different client in Keycloak with the policies that you want to enforce:</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​keycloak.enforcer(<span class="hljs-string">'user:profile'</span>, &#123;<span class="hljs-attr">resource_server_id</span>: <span class="hljs-string">'my-apiserver'</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>It is recommended to use distinct clients</strong> in Keycloak to represent your <code>frontend</code> and backend.<br>If the application you are protecting is enabled with Keycloak authorization services and you have defined client credentials in keycloak.json, you can push additional claims to the server and make them available to your policies in order to make decisions. For that, you can define a claims configuration option which expects a function that returns a JSON with the claims you want to push:</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">app.get(<span class="hljs-string">'/protected/resource'</span>, keycloak.enforcer([<span class="hljs-string">'resource:view'</span>, <span class="hljs-string">'resource:write'</span>], &#123;<br>     ​claims: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">request</span>) </span>&#123;<br>       ​<span class="hljs-keyword">return</span> &#123;<br>         ​<span class="hljs-string">"http.uri"</span>: [<span class="hljs-string">"/protected/resource"</span>],<br>         ​<span class="hljs-string">"user.agent"</span>: <span class="hljs-comment">// get user agent  from request</span><br>       ​&#125;<br>     ​&#125;<br>   ​&#125;), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;<br></code></pre></td></tr></table></figure>
+
+<p><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#additional-urls" target="_blank" rel="noopener">Advanced authorization</a><br><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#additional-urls" target="_blank" rel="noopener">readmore</a></p>
+<p>根据keycloak官方指南中原文部分可以看出如何去区分keycloak的不同应用场景。</p>
+<h6 id="Keycloak-node-adapter-Usage"><a href="#Keycloak-node-adapter-Usage" class="headerlink" title="Keycloak node adapter Usage"></a>Keycloak node adapter Usage</h6><ul>
+<li>Instantiate a Keycloak class</li>
+</ul>
+<p>The Keycloak class provides a central point for configuration and integration with your application. The simplest creation involves no arguments.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-session'</span>);<br>​<span class="hljs-keyword">var</span> Keycloak = <span class="hljs-built_in">require</span>(<span class="hljs-string">'keycloak-connect'</span>);<br><br>​<span class="hljs-keyword">var</span> memoryStore = <span class="hljs-keyword">new</span> session.MemoryStore();<br>​<span class="hljs-keyword">var</span> keycloak = <span class="hljs-keyword">new</span> Keycloak(&#123; <span class="hljs-attr">store</span>: memoryStore &#125;)<br></code></pre></td></tr></table></figure>
+
+<p>By default, this will locate a file named keycloak.json alongside the main executable of your application to initialize keycloak-specific settings (public key, realm name, various URLs). The keycloak.json file is obtained from the Keycloak Admin Console.</p>
+<p>Instantiation with this method results in all of the reasonable defaults being used. As alternative, it’s also possible to provide a configuration object, rather than the keycloak.json file:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"> ​<span class="hljs-keyword">let</span> kcConfig = &#123;<br>    ​clientId: <span class="hljs-string">'myclient'</span>,<br>    ​bearerOnly: <span class="hljs-literal">true</span>,<br>    ​serverUrl: <span class="hljs-string">'http://localhost:8080/auth'</span>,<br>    ​realm: <span class="hljs-string">'myrealm'</span>,<br>    ​realmPublicKey: <span class="hljs-string">'MIIBIjANB...'</span><br>​&#125;;<br><br>​<span class="hljs-keyword">let</span> keycloak = <span class="hljs-keyword">new</span> Keycloak(&#123; <span class="hljs-attr">store</span>: memoryStore &#125;, kcConfig)<br></code></pre></td></tr></table></figure>
+
+<p>Applications can also redirect users to their preferred identity provider by using:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​<span class="hljs-keyword">let</span> keycloak = <span class="hljs-keyword">new</span> Keycloak(&#123; <span class="hljs-attr">store</span>: memoryStore, <span class="hljs-attr">idpHint</span>: myIdP &#125;, kcConfig)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Configuring a web session store</li>
+</ul>
+<p>If you want to use web sessions to manage server-side state for authentication, you need to initialize the Keycloak(…​) with at least a store parameter, passing in the actual session store that express-session is using.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express-session'</span>);<br>​<span class="hljs-keyword">var</span> memoryStore = <span class="hljs-keyword">new</span> session.MemoryStore();<br><br>​<span class="hljs-keyword">var</span> keycloak = <span class="hljs-keyword">new</span> Keycloak(&#123; <span class="hljs-attr">store</span>: memoryStore &#125;)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Passing a custom scope value</li>
+</ul>
+<p>By default, the scope value openid is passed as a query parameter to Keycloak’s login URL, but you can add an additional custom value:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​<span class="hljs-keyword">var</span> keycloak = <span class="hljs-keyword">new</span> Keycloak(&#123; <span class="hljs-attr">scope</span>: <span class="hljs-string">'offline_access'</span> &#125;)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Installing Middleware</li>
+</ul>
+<p>Once instantiated, install the middleware into your connect-capable app:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> app = express();<br><br>​app.use( keycloak.middleware() )<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Checking Authentication</li>
+</ul>
+<p>To check that a user is authenticated before accessing a resource, simply use keycloak.checkSso(). It will only authenticate if the user is already logged-in. If the user is not logged-in, the browser will be redirected back to the originally-requested URL and remain unauthenticated:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​app.get( <span class="hljs-string">'/check-sso'</span>, keycloak.checkSso(), checkSsoHandler )<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Protecting Resources</p>
+<ul>
+<li><p>Simple authentication</p>
+<p>To enforce that a user must be authenticated before accessing a resource, simply use a no-argument version of keycloak.protect():</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​app.get( <span class="hljs-string">'/complain'</span>, keycloak.protect(), complaintHandler )<br></code></pre></td></tr></table></figure>
+
+<p><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#protecting-resources" target="_blank" rel="noopener">Role-based authorization</a></p>
+<h6 id="Express中间件"><a href="#Express中间件" class="headerlink" title="Express中间件"></a>Express中间件</h6><p><a href="http://www.passportjs.org/docs/authenticate/" target="_blank" rel="noopener">Passport is authentication middleware for Node</a></p>
+<ul>
+<li><p>passport 不能完全适配keycloak的场景，keycloak实现了自己的Adapter。但不排除未来标准化，所以保留部分passport oidc中间件策略功能，统一跳转设置未授权跳转到<code>oidc/login</code>保证逻辑完整性</p>
+</li>
+<li><p>此外，官方文档中描述了单点登陆的特性，Adapter自动默认设置server请求logout时销毁session退出用户的实现：</p>
+</li>
+</ul>
+<blockquote>
+<p>Explicit user-triggered logout</p>
+<p><strong>By default</strong>, the middleware catches calls to /logout to send the user through a Keycloak-centric logout workflow. This can be changed by specifying a logout configuration parameter to the middleware() call:</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">​app.use( keycloak.middleware( &#123; <span class="hljs-attr">logout</span>: <span class="hljs-string">'/logoff'</span> &#125; ))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>说明中间件支持配置指定的退出策略，只需要配置并use即可</p>
+</li>
+<li><p>server端ssl等意外请求报错</p>
+<ul>
+<li>process.env.NODE_TLS_REJECT_UNAUTHORIZED = ‘0’;的配置可能会影响 Keycloak的 Node Adapter 的正常使用，此处是一个很大的坑！</li>
+</ul>
+</li>
+<li><p>readmore</p>
+<ul>
+<li>Nodejs Passport 系列之一：基础概念<ul>
+<li><a href="https://www.shangyang.me/2018/03/07/javascript-nodejs-passport-01-basic/" target="_blank" rel="noopener">Nodejs Passport 系列之一：基础概念</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="Read-more"><a href="#Read-more" class="headerlink" title="Read more"></a>Read more</h6><p><a href="https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.2/html-single/securing_applications_and_services_guide/index#nodejs_adapter" target="_blank" rel="noopener">Keycloak Node.js Adapter 官方文档</a></p>
+<p><a href="https://www.keycloak.org/docs/latest/securing_apps/index.html#_nodejs_adapter" target="_blank" rel="noopener">Keycloak Node.js Adapter Latest 官方文档</a></p>
+<p><a href="https://codeburst.io/keycloak-and-express-7c71693d507a" target="_blank" rel="noopener">blog-Keycloak and Express</a></p>
+<p><a href="https://medium.com/@auscunningham/openshift-node-and-keycloak-67b25582f51c" target="_blank" rel="noopener">blog-Openshift, Node and Keycloak</a></p>
+<p><a href="https://github.com/keycloak/keycloak-nodejs-connect/tree/54815e742a931fe6f750a4a024c37ccc4d4fdc43/example" target="_blank" rel="noopener">官方Basic NodeJS Example-keycloak-nodejs-connect</a></p>
+<p><a href="https://hub.docker.com/r/jboss/keycloak/" target="_blank" rel="noopener">官方Docker Using the image</a></p>
+<blockquote>
+<p><code>keycloak-nodejs-connect</code> &amp;&amp; <code>keycloak Docker image</code> 可以做一个完整的本地案例</p>
+</blockquote>
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/05/03/%E4%BB%8EDevops%E7%9C%8B%E5%89%8D%E7%AB%AF%E5%9F%BA%E5%BB%BA/">从Devops看前端基建</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/04/27/%E5%88%AB%E5%86%8D%E7%94%A8-JWT-%E5%81%9A%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E4%BA%86/">别再用 JWT 做会话管理了</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/04/30/%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90keycloak-Express-Keycloak/">http://catzillaorz.github.io/2020/04/30/%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90keycloak-Express-Keycloak/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

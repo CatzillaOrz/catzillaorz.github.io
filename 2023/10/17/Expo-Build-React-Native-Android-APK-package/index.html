@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      Expo Build React Native Android APK package - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Create-Your-Project"><span class="toc-text">Create Your Project</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Prerequire"><span class="toc-text">Prerequire</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Run-a-build"><span class="toc-text">Run a build</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Config-a-profile-to-build-APKs"><span class="toc-text">Config a profile to build APKs</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Install-your-build"><span class="toc-text">Install your build</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Pyhsical-device"><span class="toc-text">Pyhsical device</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Read-Bild-logs-on-Expo"><span class="toc-text">Read Bild logs on Expo</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Fix-Build-Warings-and-Errors"><span class="toc-text">Fix Build Warings and Errors</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Push-notifications-overview"><span class="toc-text">Push notifications overview</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-FCM"><span class="toc-text">Android FCM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Setting-up-FCM"><span class="toc-text">Setting up FCM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Upload-server-credentials"><span class="toc-text">Upload server credentials</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Expo Build React Native Android APK package</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2023/10/17</span>
+        </span>
+
+        
+
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/React Native">React Native</a>
+                  
+                
+                  
+                    <a href="/tags/Expo">Expo</a>
+                  
+                
+                  
+                    <a href="/tags/Firebase API">Firebase API</a>
+                  
+                
+                  
+                    <a href="/tags/Android">Android</a>
+                  
+                
+                  
+                    <a href="/tags/Build APK">Build APK</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="Create-Your-Project">Create Your Project<a class="post-anchor" href="#Create-Your-Project"></a></h5><ul>
+<li><a href="https://docs.expo.dev/build/setup/" target="_blank" rel="noopener">read more about create your first build</a></li>
+</ul>
+<h5 id="Prerequire">Prerequire<a class="post-anchor" href="#Prerequire"></a></h5><ol>
+<li>Install expo cli</li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">npm install -g eas-cli<br></code></pre></td></tr></tbody></table></figure>
+
+<ol>
+<li>Login in</li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">eas login<br></code></pre></td></tr></tbody></table></figure>
+
+<ol>
+<li>Config eas</li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">eas build:configure<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><a href="https://docs.expo.dev/build-reference/variables/" target="_blank" rel="noopener">Does your app code depend on environment variables?</a></li>
+</ul>
+<h5 id="Run-a-build">Run a build<a class="post-anchor" href="#Run-a-build"></a></h5><ul>
+<li>Build For Android Emulator/device or iOS Simulator<ul>
+<li><a href="https://docs.expo.dev/build/setup/#run-a-build" target="_blank" rel="noopener">Reamme</a></li>
+<li>The easiest way to try out EAS Build is to create a build that you can run on your Android device/emulator or iOS Simulator. It’s quicker than uploading it to a store, and you don’t need store developer membership accounts. If you’d like to try this, read about <a href="https://docs.expo.dev/build-reference/apk/" target="_blank" rel="noopener">creating an installable APK for Android</a> and <a href="https://docs.expo.dev/build-reference/simulators/" target="_blank" rel="noopener">creating a simulator build for iOS</a>.</li>
+</ul>
+</li>
+<li>Build for app stores<ul>
+<li><a href="https://docs.expo.dev/build/setup/#build-for-app-stores" target="_blank" rel="noopener">Readme</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="Config-a-profile-to-build-APKs">Config a profile to build APKs<a class="post-anchor" href="#Config-a-profile-to-build-APKs"></a></h5><p><a href="https://docs.expo.dev/build-reference/apk/#configuring-a-profile-to-build-apks" target="_blank" rel="noopener">To generate an .apk, modify the eas.json by adding one of the following properties in a build profile:</a></p>
+<ul>
+<li>developmentClient to true (default)</li>
+<li>android.buildType to apk</li>
+<li>android.gradleCommand to :app:assembleRelease, :app:assembleDebug or any other gradle command that produces .apk</li>
+</ul>
+<p>Now you can run your build with the following command:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">eas build -p android --profile preview<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="Install-your-build">Install your build<a class="post-anchor" href="#Install-your-build"></a></h5><p>tips: If you haven’t installed or run an Android Emulator before, follow the <a href="https://docs.expo.dev/workflow/android-studio-emulator/" target="_blank" rel="noopener">Android Studio emulator guide</a> before proceeding.</p>
+<ul>
+<li>Once your build is completed, the CLI will prompt you to automatically download and install it on the Android Emulator. When prompted, press Y to directly install it on the emulator.</li>
+<li>In case you have multiple builds, you can also run the <code>eas build:run</code> command at any time to download a specific build and automatically install it on the Android Emulator:</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">eas build:run -p android<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>Running the latest build</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">eas build:run -p android --latest<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="Pyhsical-device">Pyhsical device<a class="post-anchor" href="#Pyhsical-device"></a></h5><ul>
+<li><a href="https://docs.expo.dev/build-reference/apk/#physical-device" target="_blank" rel="noopener">Download directly to the device</a><ul>
+<li>Once your build is completed, copy the URL to the APK from the build details page or the link provided when eas build is done.</li>
+<li>Send that URL to your device. Maybe by email? Up to you.</li>
+<li>Open the URL on your device, install the APK and run it.</li>
+</ul>
+</li>
+</ul>
+<h5 id="Read-Bild-logs-on-Expo">Read Bild logs on Expo<a class="post-anchor" href="#Read-Bild-logs-on-Expo"></a></h5><p>There you can see build history, make sure you have no <code>warnings or Errors</code> in buid process, like:</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017154025-2023-10-17-15-40-26-.png" target="_blank" rel="noopener" data-caption="20231017154025-2023-10-17-15-40-26-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017154025-2023-10-17-15-40-26-.png" alt="20231017154025-2023-10-17-15-40-26-"></a></p>
+<ul>
+<li>Errors</li>
+</ul>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017154127-2023-10-17-15-41-28-.png" target="_blank" rel="noopener" data-caption="20231017154127-2023-10-17-15-41-28-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017154127-2023-10-17-15-41-28-.png" alt="20231017154127-2023-10-17-15-41-28-"></a></p>
+<ul>
+<li>Otherwise your app will crash before runing on you Device</li>
+</ul>
+<h5 id="Fix-Build-Warings-and-Errors">Fix Build Warings and Errors<a class="post-anchor" href="#Fix-Build-Warings-and-Errors"></a></h5><ul>
+<li>Expo cli</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">npx expo install --fix<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>For example</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">Running <span class="hljs-string">"expo doctor"</span><br><br>Running 10 checks on your project...<br><br>✔ Check Expo config <span class="hljs-keyword">for</span> common issues<br><br>✔ Check package.json <span class="hljs-keyword">for</span> common issues<br><br>✔ Check dependencies <span class="hljs-keyword">for</span> packages that should not be installed directly<br><br>✔ Check <span class="hljs-keyword">for</span> common project setup issues<br><br>✔ Check npm/ yarn versions<br><br>✖ Check Expo config (app.json/ app.config.js) schema<br><br>✔ Check that packages match versions required by installed Expo SDK<br><br>✔ Check <span class="hljs-keyword">for</span> legacy global CLI installed locally<br><br>✔ Check that native modules <span class="hljs-keyword">do</span> not use incompatible support packages<br><br>✔ Check that native modules use compatible support package versions <span class="hljs-keyword">for</span> installed Expo SDK<br><br>Detailed check results:<br><br>Error: Problem validating fields <span class="hljs-keyword">in</span> app.json. Learn more: https://docs.expo.dev/workflow/configuration/<br><br> • Field: android/adaptiveIcon - should NOT have additional property <span class="hljs-string">'jsEngine'</span>.<br><br>One or more checks failed, indicating possible issues with the project.<br><br>Command <span class="hljs-string">"expo doctor"</span> failed.<br> npx -y expo-doctor exited with non-zero code: 1<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>we can follow the logs suggesstions:</p>
+<ol>
+<li>: android/adaptiveIcon - should NOT have additional property ‘jsEngine’.</li>
+<li>Command “expo doctor” failed. npx -y expo-doctor exited with non-zero code: 1</li>
+</ol>
+</li>
+<li><p>these waring and error indecated that the building process is not running correct <code>Although</code> it build success</p>
+</li>
+<li><p>After fix issues, it should be like:</p>
+</li>
+</ul>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017155430-2023-10-17-15-54-30-.png" target="_blank" rel="noopener" data-caption="20231017155430-2023-10-17-15-54-30-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017155430-2023-10-17-15-54-30-.png" alt="20231017155430-2023-10-17-15-54-30-"></a></p>
+<h5 id="Push-notifications-overview">Push notifications overview<a class="post-anchor" href="#Push-notifications-overview"></a></h5><p>Follow the instructions should do the work!</p>
+<p><a href="https://docs.expo.dev/push-notifications/push-notifications-setup/" target="_blank" rel="noopener">Readme</a>;</p>
+<ul>
+<li><p><code>Key Step</code></p>
+</li>
+<li><p>Step 3: Get Credentials for development builds</p>
+</li>
+<li><p>Android</p>
+</li>
+<li><p>Setting up FCM</p>
+</li>
+</ul>
+<h5 id="Android-FCM">Android FCM<a class="post-anchor" href="#Android-FCM"></a></h5><p>For Android and iOS, there are different requirements to set up your credentials.</p>
+<p>For Android, you need to configure Firebase Cloud Messaging (FCM) to get your credentials and set up your Expo project. It is required for all Android apps using Expo SDK.</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># FCM is not currently available for expo-notifications on iOS.</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="Setting-up-FCM">Setting up FCM<a class="post-anchor" href="#Setting-up-FCM"></a></h5><ul>
+<li>Follow these 7 steps <a href="https://docs.expo.dev/push-notifications/push-notifications-setup/#setting-up-fcm" target="_blank" rel="noopener">Setting up FCM</a></li>
+<li>Warning Proxy might need to allow google’s api & analysiz api so on, or you will failed at setting your config and enable services.</li>
+</ul>
+<h5 id="Upload-server-credentials">Upload server credentials<a class="post-anchor" href="#Upload-server-credentials"></a></h5><ul>
+<li><p><a href="https://docs.expo.dev/push-notifications/push-notifications-setup/#upload-server-credentials" target="_blank" rel="noopener">Follow these steps</a></p>
+</li>
+<li><p>key step</p>
+<ol>
+<li>Enable firebase service & get token</li>
+</ol>
+</li>
+</ul>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017160732-2023-10-17-16-07-33-.png" target="_blank" rel="noopener" data-caption="20231017160732-2023-10-17-16-07-33-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017160732-2023-10-17-16-07-33-.png" alt="20231017160732-2023-10-17-16-07-33-"></a></p>
+<ol>
+<li>paste token in your project<ul>
+<li>path: <code>doerbasemobile/credentials/android/com.yourname.doerbasemobile</code></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017160845-2023-10-17-16-08-45-.png" target="_blank" rel="noopener" data-caption="20231017160845-2023-10-17-16-08-45-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20231017160845-2023-10-17-16-08-45-.png" alt="20231017160845-2023-10-17-16-08-45-"></a></p>
+<ul>
+<li>notice</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Expo Notifications only supports the Cloud Messaging API (Legacy) key at this time. This key is deprecated by Firebase. However, it will continue to work until June 30, 2024. We will provide information on migrating to the new v1 key in the future.</span><br></code></pre></td></tr></tbody></table></figure>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2024/05/16/NextJS-Get-Started/">NextJS Get Started</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2023/09/27/Clash-or-Pro-enable-UWP-application-Loopback-Exemption-Utility/">Clash or Pro enable UWP application Loopback Exemption Utility</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2023/10/17/Expo-Build-React-Native-Android-APK-package/">http://catzillaorz.github.io/2023/10/17/Expo-Build-React-Native-Android-APK-package/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      Shell 助力开发效率提升 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Mac-环境"><span class="toc-text">Mac 环境</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Terminal-Cheatsheet"><span class="toc-text">Terminal Cheatsheet</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Shell-基础命令"><span class="toc-text">Shell 基础命令</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Shell-文本处理"><span class="toc-text">Shell 文本处理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grep"><span class="toc-text">grep</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#cut"><span class="toc-text">cut</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#paste"><span class="toc-text">paste</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#comm"><span class="toc-text">comm</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#sort"><span class="toc-text">sort</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#uniq"><span class="toc-text">uniq</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#tr"><span class="toc-text">tr</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#sed"><span class="toc-text">sed</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#awk"><span class="toc-text">awk</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#实际应用"><span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#日志统计分析"><span class="toc-text">日志统计分析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#案例-db数据批处理"><span class="toc-text">案例: db数据批处理</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Shell 助力开发效率提升</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2019/12/27</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Shell">Shell</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/tips">tips</a>
+                  
+                
+                  
+                    <a href="/tags/Shell">Shell</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><ul>
+<li><p>通过本文的介绍, 你应该对相关命令有一个初步的了解, 知道比如用什么命令可以完成怎样的操作,</p>
+</li>
+<li><p>至于具体的参数, 你不用去刻意地记, 等到你用到的时候, 你再去 cmd –help 或者 man cmd去看, 用熟悉了, 常用的你也就记住了.</p>
+</li>
+<li><p>本文首先介绍了Linux/Mac下一些常用的命令行工具, 然后介绍了一些常用的命令, 最后通过一两个案例来说明这些工具的强大之处:</p>
+<ul>
+<li>比如给定一个nginx日志文件, 能够找出HTTP 404 请求最多的top 10 是什么? 比如能找到请求耗时最多的top 10是什么? 再比如能够简单的得到每小时的”PV”是多少?</li>
+<li>再比如拿到一篇文章, 能否简单统计一下这篇文章单次词频最高的10个词语是什么?</li>
+</ul>
+</li>
+</ul>
+<h6 id="Mac-环境">Mac 环境<a class="post-anchor" href="#Mac-环境"></a></h6><ul>
+<li><p>zsh</p>
+</li>
+<li><p>on-my-zsh</p>
+</li>
+<li><p>plugin</p>
+<ul>
+<li>git</li>
+<li>autojump</li>
+<li>osx(man-preview/quick-look/pfd(print Finder director)/cdf(cd Finder))</li>
+</ul>
+</li>
+<li><p>常用快捷键(bindkey)</p>
+</li>
+<li><p>演示: 高亮/git/智能补全/跳转(j,d)…</p>
+</li>
+<li><p>MacOS彩蛋-批量替换git图床CDN地址</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">find ./ -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> sed -i<span class="hljs-string">''</span> -e  <span class="hljs-string">"s/raw.githubusercontent.com\/CatzillaOrz\/imgcdn\/master\//cdn.jsdelivr.net\/gh\/catzillaorz\/imgcdn\//g"</span> {} \;<br>rm -rf *.md<span class="hljs-_">-e</span><br><span class="hljs-comment">## 优化以上</span><br>find ./ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">'*12-29-*.md'</span> -<span class="hljs-built_in">exec</span> sed -i<span class="hljs-string">''</span> -e  <span class="hljs-string">"s/raw.githubusercontent.com\/CatzillaOrz\/imgcdn\/master\//cdn.jsdelivr.net\/gh\/catzillaorz\/imgcdn\//g"</span> {} \;<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Terminal-Cheatsheet">Terminal Cheatsheet<a class="post-anchor" href="#Terminal-Cheatsheet"></a></h6><ul>
+<li>env | grep</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">env | grep QMSAUTHN_<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Shell-基础命令">Shell 基础命令<a class="post-anchor" href="#Shell-基础命令"></a></h6><ul>
+<li><p>which/whereis, 常用 whatis, man, –help</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  .oh-my-zsh git:(master)$ whereis ls<br>/bin/ls<br>➜  .oh-my-zsh git:(master)$ which ls<br>ls: aliased to ls -G<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>基本文件目录操作</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">rm, mkdir, mv, cp, cd, ls, ln, file, stat, wc(-l/w/c), head, more, tail, cat...<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>利器 管道: |</p>
+</li>
+</ul>
+<h5 id="Shell-文本处理">Shell 文本处理<a class="post-anchor" href="#Shell-文本处理"></a></h5><ul>
+<li><p>这里就是通过案例讲了一下12个命令的大致用法和参数, 可以通过点击右边的目录直达你想要了解的命令.</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">find, grep, xargs, cut, paste, comm<br>join, sort, uniq, tr, sed, awk<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="find">find<a class="post-anchor" href="#find"></a></h6><ul>
+<li><p>常用参数</p>
+<ul>
+<li>文件名 <code>-name</code>, 文件类型<code>-type</code>, 查找最大深度<code>-maxdepth</code></li>
+<li>时间过滤(create/access/modify) <code>-[cam]time</code></li>
+<li>执行动作 <code>-exec</code></li>
+</ul>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">find ./ -name "*.json"<br>find . -maxdepth 7 -name "*.json" -type f<br>find . -name "*.log.gz" -ctime +7 -size +1M -delete (atime/ctime/mtime)<br>find . -name "*.scala" -atime -7 -exec du -h {} \;<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="grep">grep<a class="post-anchor" href="#grep"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-v(invert-match),<br>-c(count),<br>-n(line-number),<br>-i(ignore-case),<br>-l, -L, -R(-r, –recursive), -e<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">grep 'partner' ./*.scala -l<br>grep -e 'World' -e 'first' -i -R ./  (-e: or)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>相关命令: <code>grep -z / zgrep / zcat xx | grep</code></p>
+</li>
+</ul>
+<h6 id="cut">cut<a class="post-anchor" href="#cut"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-b(字节)<br>-c(字符)<br>-f(第几列), -d(分隔符), f范围: n, n-, -m, n-m<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">echo "helloworldhellp" | cut -c1-10<br>cut -d, -f2-8 csu.db.export.csv<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="paste">paste<a class="post-anchor" href="#paste"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-d 分隔符<br>-s 列转行<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat file1<br>1 11<br>2 22<br>3 33<br>4 44<br>➜  Documents$ cat file2<br>one     1<br>two     2<br>three   3<br>one1    4<br><br>➜  Documents$ paste -d, file1 file2<br>1 11,one     1<br>2 22,two     2<br>3 33,three   3<br>4 44,one1    4<br>➜  Documents$ paste -s -d: file1 file2<br>a 11:b bb:3 33:4 44<br>one     1:two     2:three   3:one1    4<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="join">join<a class="post-anchor" href="#join"></a></h6><ul>
+<li><p>类似sql中的 <code>...inner join ...on ...</code>, <code>-t</code> 分隔符, 默认为空格或tab</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat j1<br>1 11<br>2 22<br>3 33<br>4 44<br>5 55<br>➜  Documents$ cat j2<br>one     1   0<br>one     2   1<br>two     4   2<br>three   5   3<br>one1    5   4<br>➜  Documents$ join -1 1 -2 3 j1 j2<br>1 11 one 2<br>2 22 two 4<br>3 33 three 5<br>4 44 one1 5<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h5 id="comm">comm<a class="post-anchor" href="#comm"></a></h5><ul>
+<li><p>常用参数</p>
+<ul>
+<li>用法 <code>comm [-123i] file1 file2</code></li>
+<li>字典序列, 3列: 只在file1/file2/both</li>
+<li>去掉某列, i 忽略大小写</li>
+</ul>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell"><br>➜  Documents$ seq 1 5 >file11<br>➜  Documents$ seq 2 6 >file22<br>➜  Documents$ cat file11<br>1<br>2<br>3<br>4<br>5<br>➜  Documents$ cat file22<br>2<br>3<br>4<br>5<br>6<br>➜  Documents$ comm file11 file22<br>1<br>        2<br>        3<br>        4<br>        5<br>    6<br>➜  Documents$ comm -1 file11 file22<br>    2<br>    3<br>    4<br>    5<br>6<br>➜  Documents$ comm -2 file11 file22<br>1<br>    2<br>    3<br>    4<br>    5<br>➜  Documents$ comm -23 file11 file22<br>1<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>相关命令 diff(类似git diff)</p>
+</li>
+</ul>
+<h6 id="sort">sort<a class="post-anchor" href="#sort"></a></h6><ul>
+<li><p>常用参数</p>
+<ul>
+<li>-d, –dictionary-order</li>
+<li>-n, –numeric-sort</li>
+<li>-r, –reverse</li>
+<li>-b, –ignore-leading-blanks</li>
+<li>-k, –key</li>
+</ul>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat file2<br>one     1<br>two     2<br>three   3<br>one1    4<br>➜  Documents$ sort file2<br>one     1<br>one1    4<br>three   3<br>two     2<br>➜  Documents$ sort -b -k2 -r file2<br>one1    4<br>three   3<br>two     2<br>one     1<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="uniq">uniq<a class="post-anchor" href="#uniq"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-c 重复次数<br>-d 重复的<br>-u 没重复的<br>-f 忽略前几列<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat file4<br>11<br>22<br>33<br>11<br>11<br>➜  Documents$ sort file4 | uniq -c<br>3 11<br>1 22<br>1 33<br>➜  Documents$ sort file4 | uniq -d<br>11<br>➜  Documents$ sort file4 | uniq -u<br>22<br>33<br>➜  Documents$ cat file3<br>one     1<br>two     1<br>three   3<br>one1    4<br>➜  Documents$ uniq -c -f 1 file3<br>2 one     1<br>1 three   3<br>1 one1    4<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>注意: uniq比较相邻的是否重复, 一般与sort联用</p>
+</li>
+</ul>
+<h6 id="tr">tr<a class="post-anchor" href="#tr"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-c 补集<br>-d 删除<br>-s 压缩相邻重复的<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ echo '1111234444533hello' | tr  '[1-3]' '[a-c]'<br>aaaabc44445cchello<br>➜  Documents$ echo '1111234444533hello' | tr -d '[1-3]'<br>44445hello<br>➜  Documents$ echo '1111234444533hello' | tr -dc '[1-3]'<br>11112333<br>➜  Documents$ echo '1111234444533hello' | tr -s '[0-9]'<br>123453hello<br>➜  Documents$ echo 'helloworld' | tr '[:lower:]' '[:upper:]'<br>HELLOWORLD<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="sed">sed<a class="post-anchor" href="#sed"></a></h6><ul>
+<li><p>常用参数</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">-d 删除<br>-s 替换, g 全局<br>-e 多个命令叠加<br>-i 修改原文件(Mac下加参数 “”, 备份)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat file2<br>one     1<br>two     2<br>three   3<br>one1    4<br>➜  Documents$ sed "2,3d" file2<br>one     1<br>one1    4<br>➜  Documents$ sed '/one/d' file2<br>two     2<br>three   3<br>➜  Documents$ sed 's/one/111/g' file2<br>111     1<br>two     2<br>three   3<br>1111    4<br><span class="hljs-meta">#</span><span class="bash">将one替换成111 并将含有two的行删除</span><br>➜  Documents$ sed -e 's/one/111/g' -e '/two/d' file2<br>111     1<br>three   3<br>1111    4<br><span class="hljs-meta">#</span><span class="bash"> ()标记(转义), \1 引用</span><br>➜  Documents$ sed 's/\([0-9]\)/\1.html/g' file2<br>one     1.html<br>two     2.html<br>three   3.html<br>one1.html    4.html<br><span class="hljs-meta">#</span><span class="bash"> 与上面一样 & 标记匹配的字符</span><br>➜  Documents$ sed 's/[0-9]/&.html/g' file2<br>one     1.html<br>two     2.html<br>three   3.html<br>one1.html    4.html<br>➜  Documents$ cat mobile.csv<br>"13090246026"<br>"18020278026"<br>"18520261021"<br>"13110221022"<br>➜  Documents$ sed 's/\([0-9]\{3\}\)[0-9]\{4\}/\1xxxx/g' mobile.csv<br>"130xxxx6026"<br>"180xxxx8026"<br>"185xxxx1021"<br>"131xxxx1022"<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h6 id="awk">awk<a class="post-anchor" href="#awk"></a></h6><ul>
+<li><p>基本参数和语法</p>
+<ul>
+<li>NR 行号, NF 列数量</li>
+<li>$1 第1列, $2, $3…</li>
+<li>-F fs fs分隔符，字符串或正则</li>
+<li>语法: awk ‘BEGIN{ commands } pattern{ commands } END{ commands }’, 流程如下:<ul>
+<li>执行begin</li>
+<li>对输入每一行执行 pattern{ commands }, pattern 可以是 正则/reg exp/, 关系运算等</li>
+<li>处理完毕, 执行 end</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>示例</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat file5<br>11  11 aa cc<br>22  22 bb<br>33  33 d<br>11  11<br>11  11<br><span class="hljs-meta">#</span><span class="bash">行号, 列数量, 第3列</span><br>➜  Documents$ awk '{print NR"("NF"):", $3}' file5<br>1(4): aa<br>2(3): bb<br>3(3): d<br>4(2):<br>5(2):<br><span class="hljs-meta">#</span><span class="bash">字符串分割, 打印1，2列</span><br>➜  Documents$ awk -F"xxxx" '{print $1, $2}' mobile.csv<br>"130 6026"<br>"180 8026"<br>"185 1021"<br>"131 1022"<br><span class="hljs-meta">#</span><span class="bash">添加表达式</span><br>➜  Documents$ awk '$1>=22 {print NR":", $3}' file5<br>2: bb<br>3: d<br><span class="hljs-meta">#</span><span class="bash">累加1到36，奇数，偶数</span><br>➜  Documents$ seq 36 | awk 'BEGIN{sum=0; print "question:"} {print $1" +"; sum+=$1} END{print "="; print sum}' | xargs | sed 's/+ =/=/'<br>question: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20 + 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30 + 31 + 32 + 33 + 34 + 35 + 36 = 666<br>➜  Documents$ seq 36 | awk 'BEGIN{sum=0; print "question:"} $1 % 2 ==1 {print $1" +"; sum+=$1} END{print "="; print sum}' | xargs | sed 's/+ =/=/'<br>question: 1 + 3 + 5 + 7 + 9 + 11 + 13 + 15 + 17 + 19 + 21 + 23 + 25 + 27 + 29 + 31 + 33 + 35 = 324<br>➜  Documents$ seq 36 | awk 'BEGIN{sum=0; print "question:"} $1 % 2 !=1 {print $1" +"; sum+=$1} END{print "="; print sum}' | xargs | sed 's/+ =/=/'<br>question: 2 + 4 + 6 + 8 + 10 + 12 + 14 + 16 + 18 + 20 + 22 + 24 + 26 + 28 + 30 + 32 + 34 + 36 = 342<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>其他高级语法: for, while 等, 各种函数等, 本身awk是一个强大的语言, 可以掌握一些基本的用法.</p>
+</li>
+</ul>
+<h5 id="实际应用">实际应用<a class="post-anchor" href="#实际应用"></a></h5><h6 id="日志统计分析">日志统计分析<a class="post-anchor" href="#日志统计分析"></a></h6><ul>
+<li><p>例如拿到一个nginx日志文件, 可以做很多事情, 比如看哪些请求是耗时最久的进而进行优化, 比如看每小时的”PV”数 等等.</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ head -n5 std.nginx.log<br>106.38.187.225 - - [20/Feb/2017:03:31:01 +0800] www.tanglei.name "GET /baike/208344.html HTTP/1.0" 301 486 "-" "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322) 360JK yunjiankong 975382" "106.38.187.225, 106.38.187.225" - 0.000<br>106.38.187.225 - - [20/Feb/2017:03:31:02 +0800] www.tanglei.name "GET /baike/208344.html HTTP/1.0" 301 486 "-" "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322) 360JK yunjiankong 975382" "106.38.187.225, 106.38.187.225" - 0.000<br>10.130.64.143 - - [20/Feb/2017:03:31:02 +0800] stdbaike.bdp.cc "POST /baike/wp-cron.php?doing_wp_cron=1487532662.2058920860290527343750 HTTP/1.1" 200 182 "-" "WordPress/4.5.6; http://www.tanglei.name/baike" "10.130.64.143" 0.205 0.205<br>10.130.64.143 - - [20/Feb/2017:03:31:02 +0800] www.tanglei.name "GET /external/api/login-status HTTP/1.0" 200 478 "-" "-" "10.130.64.143" 0.003 0.004<br>10.130.64.143 - - [20/Feb/2017:03:31:02 +0800] www.tanglei.name "GET /content_util/authorcontents?count=5&offset=0&israndom=1&author=9 HTTP/1.0" 200 11972 "-" "-" "10.130.64.143" 0.013 0.013<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>上面是nginx的一个案例, 例如希望找到top 10 请求的path:</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">head -n 10000 std.nginx.log | awk '{print $8 "," $10}' | grep ',404' | sort | uniq -c | sort -nr -k1 | head -n 10<br><span class="hljs-meta">#</span><span class="bash">or</span><br>head -n 10000 std.nginx.log | awk '$10==404 {print $8}' |sort | uniq -c | sort -nr -k1 | head -n 10<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>当然, 你可能一次不会直接处理成功, 一般会先少拿一部分数据进行处理看逻辑是否正常, 或者你可以缓存一些中间结果.</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">cat std.nginx.log | awk '{print $8 "," $10}' | grep ',404' >404.log<br>sort 404.log | uniq -c | sort -nr -k1 | head -n 10<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>再比如每小时请求数量, 请求耗时等等</p>
+  <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ head -n 100000 std.nginx.log | awk -F: '{print $1 $2}' | cut -f3 -d/ | uniq -c<br>8237 201703<br>15051 201704<br>16083 201705<br>18561 201706<br>22723 201707<br>19345 201708<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>其他实际案例 ip block</p>
+</li>
+</ul>
+<h6 id="案例-db数据批处理">案例: db数据批处理<a class="post-anchor" href="#案例-db数据批处理"></a></h6><ul>
+<li><p>背景: 因为某服务bug, 导致插入到db的图片路径不对, 需要将形如(安全需要已经将敏感数据替换)</p>
+</li>
+<li><p><code>https://www.tanglei.name/upload/photos/129630//internal-public/shangtongdai/2017-02-19-abcdefg-eb85-4c24-883e-hijklmn.jpg</code></p>
+</li>
+<li><p>替换成</p>
+</li>
+<li><p><code>http://www.tanglei.me/internal-public/shangtongdai/2017-02-19-abcdefg-eb85-4c24-883e-hijklmn.jpg</code>, 因为mysql等db貌似不支持直接正则的替换, 所以不能够很方便的进行写sql进行替换.</p>
+</li>
+<li><p>当然将数据导出, 然后写python等脚本处理也是一种解决方案, 但如果用上面的命令行处理, 只需要几十秒即可完成.</p>
+</li>
+<li><p>步骤:</p>
+<ul>
+<li><p>准备数据</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">select id, photo_url_1, photo_url_2, photo_url_3 from somedb.sometable where<br>photo_url_1 like 'https://www.tanglei.name/upload/photos/%//internal-public/%' or<br>photo_url_2 like 'https://www.tanglei.name/upload/photos/%//internal-public/%' or<br>photo_url_3 like 'https://www.tanglei.name/upload/photos/%//internal-public/%';<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>替换原文件</p>
+<ul>
+<li>一般在用sed替换的时候, 先测试一下是否正常替换.</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">测试是否OK</span><br>head -n 5 customers.csv | sed 's|https://www.tanglei.name/upload/photos/[0-9]\{1,\}/|http://www.tanglei.me|g'<br><span class="hljs-meta">#</span><span class="bash"> 直接替换原文件, 可以sed -i <span class="hljs-string">".bak"</span> 替换时保留原始备份文件</span><br>sed -i "" 's|https://www.tanglei.name/upload/photos/[0-9]\{1,\}/|http://www.tanglei.me|g' customers.csv<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>拼接sql, 然后执行</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">awk -F, '{print "update sometable set photo_url_1 = " $2, ", photo_url_2 = " $3, ", photo_url_3 = " $4, " where id = " $1 ";" }' customers.csv > customer.sql<br><span class="hljs-meta">#</span><span class="bash">然后执行sql 即可</span><br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="其他">其他<a class="post-anchor" href="#其他"></a></h5><ul>
+<li><p>play framework session</p>
+<ul>
+<li><p>老方式: 需要启play环境, 慢</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">sbt "project site" consoleQuick<br>import play.api.libs._<br>val sec = "secret...secret"<br>var uid = "97522"<br>Crypto.sign(s"uid=$uid", sec.getBytes("UTF-8")) + s"-uid=$uid"<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>新方式:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$  ~/stdcookie.sh 97522<br>918xxxxdf64abcfcxxxxc465xx7554dxxxx21e-uid=97522<br>➜  Documents$ cat ~/stdcookie.sh<br><span class="hljs-meta">#</span><span class="bash">!/bin/bash <span class="hljs-comment">##  cannot remove this line</span></span><br>uid=$1<br>hash=`echo -n "uid=$uid" | openssl dgst -sha1 -hmac "secret...secret"`<br>echo "$hash-uid=$uid"<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>统计文章单词频率: 下面案例统计了川普就职演讲原文中词频最高的10个词.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ head -n3 chuanpu.txt<br>Chief Justice Roberts, President Carter, President Clinton, President Bush, President Obama, fellow Americans and people of the world, thank you.<br><br>We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people. Together we will determine the course of America and the world for many, many years to come.<br>➜  Documents$ cat chuanpu.txt | tr -dc 'a-zA-Z ' | xargs -n 1 | sort | uniq -c | sort -nr -k1 | head -n 20<br>65 the<br>63 and<br>48 of<br>46 our<br>42 will<br>37 to<br>21 We<br>20 is<br>18 we<br>17 America<br>15 a<br>14 all<br>13 in<br>13 for<br>13 be<br>13 are<br>10 your<br>10 not<br>10 And<br>10 American<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>随机数</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  Documents$ cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 5<br>cpBnvC0niwTybSSJhUUiZwIz6ykJxBvu<br>VDP56NlHnugAt2yDySAB9HU2Nd0LlYCW<br>0WEDzpjPop32T5STvR6K6SfZMyT6KvAI<br>a9xBwBat7tJVaad279fOPdA9fEuDEqUd<br>hTLrOiTH5FNP2nU3uflsjPUXJmfleI5c<br>➜  Documents$ cat /dev/urandom | head -c32 | base64<br>WoCqUye9mSXI/WhHODHDjzLaSb09xrOtbrJagG7Kfqc=<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>图片处理压缩, 可批量改图片大小等等 <code>sips</code></p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell">➜  linux-shell-more-effiency$ sips -g all which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>pixelWidth: 280<br>pixelHeight: 81<br>typeIdentifier: public.png<br>format: png<br>formatOptions: default<br>dpiWidth: 72.000<br>dpiHeight: 72.000<br>samplesPerPixel: 4<br>bitsPerSample: 8<br>hasAlpha: yes<br>space: RGB<br>profile: DELL U2412M<br>➜  linux-shell-more-effiency$ sips -Z 250 which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>➜  linux-shell-more-effiency$ sips -g all which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>pixelWidth: 250<br>pixelHeight: 72<br>typeIdentifier: public.png<br>format: png<br>formatOptions: default<br>dpiWidth: 72.000<br>dpiHeight: 72.000<br>samplesPerPixel: 4<br>bitsPerSample: 8<br>hasAlpha: yes<br>space: RGB<br>profile: DELL U2412M<br>➜  linux-shell-more-effiency$ sips -z 100 30 which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>➜  linux-shell-more-effiency$ sips -g pixelWidth -g pixelHeight which-whereis.png<br>/Users/tanglei/Documents/linux-shell-more-effiency/which-whereis.png<br>pixelWidth: 30<br>pixelHeight: 100<br></code></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Reference</p>
+<ul>
+<li><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="noopener">Linux工具快速教程</a></li>
+<li><a href="http://man.linuxde.net/" target="_blank" rel="noopener">Linux命令大全</a></li>
+<li><a href="http://tldp.org/LDP/abs/html/" target="_blank" rel="noopener">Advanced Bash-Scripting Guide</a></li>
+<li><a href="https://book.douban.com/subject/25900403/" target="_blank" rel="noopener">UNIX环境高级编程</a></li>
+</ul>
+</li>
+</ul>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2019/12/31/%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%BD%91%E7%AB%99%E6%9C%AF%E8%AF%AD%E5%88%86%E6%9E%90/">大型分布式网站术语分析</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2019/12/18/Mac-Tips/">Mac Tips</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2019/12/27/Shell-%E5%8A%A9%E5%8A%9B%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/">http://catzillaorz.github.io/2019/12/27/Shell-%E5%8A%A9%E5%8A%9B%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

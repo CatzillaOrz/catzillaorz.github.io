@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      微前端-qiankun2.0 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#Why-not-Iframe"><span class="toc-text">Why not Iframe</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#目标是最完善的微前端解决方案-qiankun-2-0"><span class="toc-text">目标是最完善的微前端解决方案 - qiankun 2.0</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#qiankun-简介"><span class="toc-text">qiankun 简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#定位变化"><span class="toc-text">定位变化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Readmore"><span class="toc-text">Readmore</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">微前端-qiankun2.0</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/05/22</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/SPA">SPA</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/SPA">SPA</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h6 id="Why-not-Iframe">Why not Iframe<a class="post-anchor" href="#Why-not-Iframe"></a></h6><p>为什么不用 iframe，这几乎是所有微前端方案第一个会被 challenge 的问题。但是大部分微前端方案又不约而同放弃了 iframe 方案，自然是有原因的，并不是为了 “炫技” 或者刻意追求 “特立独行”。</p>
+<p>如果不考虑体验问题，iframe 几乎是最完美的微前端解决方案了。</p>
+<p>iframe 最大的特性就是提供了浏览器原生的硬隔离方案，不论是样式隔离、js 隔离这类问题统统都能被完美解决。但他的最大问题也在于他的隔离性无法被突破，导致应用间上下文无法被共享，随之带来的开发体验、产品体验的问题。</p>
+<p>总结为以下几点（不包括全部）：</p>
+<ul>
+<li>url 不同步。浏览器刷新 iframe url 状态丢失、后退前进按钮无法使用。</li>
+<li>UI 不同步，DOM 结构不共享。想象一下屏幕右下角 1/4 的 iframe 里来一个带遮罩层的弹框，同时我们要求这个弹框要浏览器居中显示，还要浏览器 resize 时自动居中..</li>
+<li>全局上下文完全隔离，内存变量不共享。iframe 内外系统的通信、数据同步等需求，主应用的 cookie 要透传到根域名都不同的子应用中实现免登效果。</li>
+<li>慢。每次子应用进入都是一次浏览器上下文重建、资源重新加载的过程。</li>
+</ul>
+<p>其中有的问题比较好解决(问题1)，有的问题我们可以睁一只眼闭一只眼(问题4)，但有的问题我们则很难解决(问题3)甚至无法解决(问题2)，而这些无法解决的问题恰恰又会给产品带来非常严重的体验问题， 最终导致我们舍弃了 iframe 方案。</p>
+<h6 id="目标是最完善的微前端解决方案-qiankun-2-0">目标是最完善的微前端解决方案 - qiankun 2.0<a class="post-anchor" href="#目标是最完善的微前端解决方案-qiankun-2-0"></a></h6><p>2019 年 6 月，微前端框架 qiankun 正式发布了 1.0 版本，在这一年不到的时间内，我们收获了 4k+ star，收获了来自 single-spa 官方团队的问候，支撑了阿里 200+ 线上应用，也成为社区很多团队选用的微前端解决方案。</p>
+<p><a href="mailto:qiankun@2.0">qiankun@2.0</a> 带来了一些新能力的同时，只做了很小的 API 调整，1.x 的用户可以很轻松的迁移到 2.x 版本，详细信息见下方 升级指南 小节。</p>
+<h6 id="qiankun-简介">qiankun 简介<a class="post-anchor" href="#qiankun-简介"></a></h6><p>微前端是最近一年国内前端领域被频繁提及的关键字，虽然它并不是一个全新的领域/技术，但很显然在当今越来越多的前端应用即将步入第 3 个、第 5 个甚至更久的年头的背景下，如何给 巨石应用/遗产应用 注入新鲜的技术血液已经成为我们不得不正视的问题，而微前端正是解决这类问题的一个非常合适的解决方案。</p>
+<p>qiankun 是一个生产可用的微前端框架，它基于 single-spa，具备 js 沙箱、样式隔离、HTML Loader、预加载 等微前端系统所需的能力。qiankun 可以用于任意 js 框架，微应用接入像嵌入一个 iframe 系统一样简单。</p>
+<h6 id="定位变化">定位变化<a class="post-anchor" href="#定位变化"></a></h6><p>qiankun 2.0 带来的最大变化便是 qiankun 的定位将由 微前端框架 转变为 微应用加载器。</p>
+<p>此前 qiankun 的典型应用场景是 route-based 的控制台应用，做为一个微应用的聚合框架而被使用。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200522175813-2020-05-22-17-58-14-.png" target="_blank" rel="noopener" data-caption="20200522175813-2020-05-22-17-58-14-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200522175813-2020-05-22-17-58-14-.png" alt="20200522175813-2020-05-22-17-58-14-"></a></p>
+<p>如上图所示，在这种场景下，一个负责聚合与切换的主应用 与 多个相互独自的微应用 一起构成了整个大的微前端应用，一般来说页面上活跃着的也往往只有一个微应用。</p>
+<p>而这是微前端的场景之一，在另外一些场景下，你应该可以在同一个页面中，加载多个不同的微应用，每个微应用都是主应用的组成部分 或者是 提供一些增强能力，这种场景可以说是微应用粒度的前端组件化。</p>
+<p>因此，<a href="mailto:qiankun@2.0">qiankun@2.0</a> 将跳出 route-based 的微前端场景， 提供更加通用的微应用加载能力，让用户可以更加自由的组合微应用来搭建产品。</p>
+<h6 id="Readmore">Readmore<a class="post-anchor" href="#Readmore"></a></h6><p><a href="https://www.yuque.com/kuitos/gky7yw/viueoh" target="_blank" rel="noopener">支持多应用并行及多实例沙箱, 支持手动 加载/卸载 微应用,支持 IE11 沙箱兼容, 官方的极简微应用通信方案, 支持基于 Shadow DOM 的样式隔离</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/06/05/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/05/22/%E5%BE%AE%E5%89%8D%E7%AB%AF-Single-SPA/">微前端-Single-SPA</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/05/22/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">http://catzillaorz.github.io/2020/05/22/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

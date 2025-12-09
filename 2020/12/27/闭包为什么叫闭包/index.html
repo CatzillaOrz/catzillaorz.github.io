@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      闭包为什么叫闭包 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#维基百科定义"><span class="toc-text">维基百科定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MDN"><span class="toc-text">MDN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Currying-in-JS"><span class="toc-text">Currying in JS</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#The-Strategy"><span class="toc-text">The Strategy</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Curry-Wrapper"><span class="toc-text">Curry Wrapper</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Recursive-Curry"><span class="toc-text">Recursive Curry</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tweaks-and-Optimisations"><span class="toc-text">Tweaks and Optimisations</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Variadic-Curry"><span class="toc-text">Variadic Curry</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Bonus"><span class="toc-text">Bonus</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">闭包为什么叫闭包</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/12/27</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Frontend">Frontend</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/闭包">闭包</a>
+                  
+                
+                  
+                    <a href="/tags/柯里化">柯里化</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="维基百科定义">维基百科定义<a class="post-anchor" href="#维基百科定义"></a></h5><blockquote>
+<p>在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是在支持头等函数的编程语言中实现词法绑定的一种技术。闭包在实现上是一个结构体，它存储了一个函数（通常是其入口地址）和一个关联的环境（相当于一个符号查找表）。环境里是若干对符号和值的对应关系，它既要包括约束变量（该函数内部绑定的符号），也要包括自由变量（在函数外部定义但在函数内被引用），有些函数也可能没有自由变量。闭包跟函数最大的不同在于，当捕捉闭包的时候，它的自由变量会在捕捉时被确定，这样即便脱离了捕捉时的上下文，它也能照常运行。捕捉时对于值的处理可以是值拷贝，也可以是名称引用，这通常由语言设计者决定，也可能由用户自行指定（如C++）。</p>
+</blockquote>
+<h5 id="MDN">MDN<a class="post-anchor" href="#MDN"></a></h5><blockquote>
+<p><strong>A closure is the combination of a function and the lexical environment within which that function was declared.</strong>— MDN</p>
+</blockquote>
+<h5 id="Currying-in-JS">Currying in JS<a class="post-anchor" href="#Currying-in-JS"></a></h5><p>We can’t write the JS engine to currify all functions, but we can come up with a strategy to do so.</p>
+<h6 id="The-Strategy">The Strategy<a class="post-anchor" href="#The-Strategy"></a></h6><p>Examining the two forms of sum3 reveals an important fact. The actual function body from the plain function gets transferred as-is to the last function in the chain.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum3</span>(<span class="hljs-params">x, y, z</span>) </span>{ <span class="hljs-comment">//... }</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum3</span>(<span class="hljs-params">x</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">y</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">z</span>) =></span> { <span class="hljs-comment">// ... }; }; }</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>Before we reach the last level, we won’t have all the arguments in the execution scope. This means that we create a wrapper function that collects the arguments and calls the real function. All the <strong>intermediate</strong> nested functions are called accumulator functions — at least that’s what I call them.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_sum3</span>(<span class="hljs-params">x, y, z</span>) </span>{ <span class="hljs-keyword">return</span> x + y + z; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum3</span>(<span class="hljs-params">x</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">y</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">z</span>) =></span> { <span class="hljs-keyword">return</span> _sum3(x, y, z); }; }; }<br>sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment">// 6 <-- It works!</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Curry-Wrapper">Curry Wrapper<a class="post-anchor" href="#Curry-Wrapper"></a></h6><p>Since we’re using a wrapper function in place of the real function, we can create another function that generates this wrapper function. We’ll call this new function curry — a higher-order function.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">y</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">z</span>) =></span> { <span class="hljs-keyword">return</span> fn(x, y, z); }; }; }; }<br><span class="hljs-keyword">const</span> sum3 = curry(<span class="hljs-function">(<span class="hljs-params">x, y, z</span>) =></span> { <span class="hljs-keyword">return</span> x + y + z; });<br>sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment">// 6 <-- It works!</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>All we now need are different arity curry functions that take: 0 arguments, 1 argument, 2 arguments and so on — not really.</p>
+<h6 id="Recursive-Curry">Recursive Curry<a class="post-anchor" href="#Recursive-Curry"></a></h6><p>Instead of writing multiple wrapper functions, we will write a curry function such that it works for functions of all arity.</p>
+<p>Let’s say we do write multiple curry functions. This is what they’ll look like:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry0</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> fn(); }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry1</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a1</span>) =></span> { <span class="hljs-keyword">return</span> fn(a1); }; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry2</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a1</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a2</span>) =></span> { <span class="hljs-keyword">return</span> fn(a1, a2); }; }; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry3</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a1</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a2</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a3</span>) =></span> { <span class="hljs-keyword">return</span> fn(a1, a2, a3); }; }; }; }<br>...<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curryN</span>(<span class="hljs-params">fn</span>)</span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a1</span>) =></span> { <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a2</span>) =></span> { ... return (aN) => { <span class="hljs-comment">// N-th nested function return fn(a1, a2, ... aN); }; }; }; }</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>We can make a few observations:</p>
+<ul>
+<li>The i-th accumulator returns another function that is the (i+1)-th accumulator. We can also say that it is the j-th accumulator.</li>
+<li>The i-th accumulator accepts the i-th argument, while maintaining the previous i - 1 arguments in its environment.</li>
+<li>There will be N nested functions, where N is the arity of function fn.</li>
+<li>The N-th function always calls and returns fn.</li>
+<li>curry0 is pointless waste of a function and should not exist.</li>
+</ul>
+<p>Using the above observations, we can see that the curry function returns a nested structure of self-similar accumulator functions. We can easily generate such a structure using recursion.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { <span class="hljs-comment">// accumulator function }; }</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> nest(fn); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>We obviously need a terminal case else our code will form an infinite fractal. We will maintain a variable i that keeps track of our current level. The terminal case will be when i === N.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">fn, i</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { <span class="hljs-keyword">if</span> (i === fn.length) { <span class="hljs-keyword">return</span> fn(); }<br><span class="hljs-keyword">return</span> nest(fn, i + <span class="hljs-number">1</span>); }; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> nest(fn, <span class="hljs-number">1</span>); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Next up, we need to store the accumulated arguments and pass them to fn() in the terminal case. The easiest solution is to create an array args inside curry and pass it to nest.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">fn, i, args</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { args.push(x);<br><span class="hljs-keyword">if</span> (i === fn.length) { <span class="hljs-keyword">return</span> fn(...args); }<br><span class="hljs-keyword">return</span> nest(fn, i + <span class="hljs-number">1</span>, args); }; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">const</span> args = []; <span class="hljs-keyword">return</span> nest(fn, <span class="hljs-number">1</span>, args); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Just add a guard for 0-arity functions and we are done.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">if</span> (fn.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> fn; }<br><span class="hljs-keyword">const</span> args = []; <span class="hljs-keyword">return</span> nest(fn, <span class="hljs-number">1</span>, args); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>It’s a good idea to test our code at this stage:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> log1 = curry(<span class="hljs-function">(<span class="hljs-params">x</span>) =></span> <span class="hljs-built_in">console</span>.log(x)); log1(<span class="hljs-number">10</span>); <span class="hljs-comment">// 10</span><br><span class="hljs-keyword">const</span> log2 = curry(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =></span> <span class="hljs-built_in">console</span>.log(x, y)); log2(<span class="hljs-number">10</span>)(<span class="hljs-number">20</span>); <span class="hljs-comment">// 10 20</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>You can run your tests here on codepen.</p>
+<h6 id="Tweaks-and-Optimisations">Tweaks and Optimisations<a class="post-anchor" href="#Tweaks-and-Optimisations"></a></h6><p>At this point, we can either do nothing or we can try to optimise our code.</p>
+<p>For starters, we can move nest inside curry, thus reducing the number of arguments passed to nest by reading fn and args from the closure.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">if</span> (fn.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> fn; }<br><span class="hljs-keyword">const</span> args = [];<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">i</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { args.push(x);<br><span class="hljs-keyword">if</span> (i === fn.length) { <span class="hljs-keyword">return</span> fn(...args); }<br><span class="hljs-keyword">return</span> nest(i + <span class="hljs-number">1</span>); }; }<br><span class="hljs-keyword">return</span> nest(<span class="hljs-number">1</span>); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Let’s tweak this new curry to be more functional and not rely on closure variables. We do this by supplying args and fn.length as nest arguments.</p>
+<p>Further still, instead of passing fn.length for comparison, we can pass the remaining depth of recursion.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">if</span> (fn.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> fn; }<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">N, args</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">x</span>) =></span> { <span class="hljs-keyword">if</span> (N - <span class="hljs-number">1</span> === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> fn(...args, x); }<br><span class="hljs-keyword">return</span> nest(N - <span class="hljs-number">1</span>, [...args, x]); }; }<br><span class="hljs-keyword">return</span> nest(fn.length, []); }<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Variadic-Curry">Variadic Curry<a class="post-anchor" href="#Variadic-Curry"></a></h6><p>Let’s see our old friend sum3 and its older brother sum5:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> sum3 = curry(<span class="hljs-function">(<span class="hljs-params">x, y, z</span>) =></span> { <span class="hljs-keyword">return</span> x + y + z; });<br><span class="hljs-keyword">const</span> sum5 = curry(<span class="hljs-function">(<span class="hljs-params">a, b, c, d, e</span>) =></span> { <span class="hljs-keyword">return</span> a + b + c + d + e; });<br>sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) <span class="hljs-comment">// 6 <-- It works! sum5(1)(2)(3)(4)(5) // 15 <-- It works!</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>Look at this abomination of a code! No doubt it works, but it looks …</p>
+<p>In haskell and other functional languages, the syntax is pretty relaxed. Compared to this monstrosity, let’s see how haskell deals with it:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> sum3 x y z = x + y + z <span class="hljs-keyword">let</span> sum5 a b c d e = a + b + c + d + e<br>sum3 <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> > <span class="hljs-number">6</span><br>sum5 <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> > <span class="hljs-number">15</span><br>sum5 <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> (sum3 <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>) <span class="hljs-number">5</span> > <span class="hljs-number">17</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>If you ask me, even the simple function calls in JS look better:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js">sum5(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>) <span class="hljs-comment">// 15</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>But this doesn’t mean we have to give up on currying. What we can do is settle for some middle ground. A system where the curried, the uncurried syntaxes both work and the ones in between work too.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js">sum3(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>) sum3(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>) sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>) sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>We need a simple modification — convert accumulators to variadic functions.</p>
+<p>However, when the i-th accumulator accepts k arguments, the next accumulator won’t be of N - 1 depth, but rather N - k depth. We were using N - 1 because all accumulators were accepting one argument each.</p>
+<p>This also means that we no longer require the 0-arity guard.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nest</span>(<span class="hljs-params">N, args</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">...xs</span>) =></span> { <span class="hljs-keyword">if</span> (N - xs.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> fn(...args, ...xs); }<br><span class="hljs-keyword">return</span> nest(N - xs.length, [...args, ...xs]); }; }<br><span class="hljs-keyword">return</span> nest(fn.length, []); }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>It’s testing time. You can run your tests here on codepen.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params"></span>)</span>{...}<br><span class="hljs-keyword">const</span> sum3 = curry(<span class="hljs-function">(<span class="hljs-params">x, y, z</span>) =></span> x + y + z);<br><span class="hljs-built_in">console</span>.log( sum3(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), sum3(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>), sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), sum3(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>), ); <span class="hljs-comment">// 6 6 6 6</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Bonus">Bonus<a class="post-anchor" href="#Bonus"></a></h6><p>We did it! We created a curry function that takes multi-arity functions and returns variadic curried function(s). This would be a good time to take a bow.</p>
+<p>There is yet another method of currying in JS.</p>
+<p>In JS, we can bind arguments to a function and create a bound copy of it. The resultant function is said to be “partially applied” — partially, because the function already holds some of its arguments, but requires some more before invocation.</p>
+<p>Up until now, curry would return a function that accumulates arguments until all arguments were received and then invoke fn with the arguments. By binding arguments to the function, we can remove the need for multiple nested accumulator functions.</p>
+<p>And this is what we get:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curry</span>(<span class="hljs-params">fn</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">...xs</span>) =></span> { <span class="hljs-keyword">if</span> (xs.length >= fn.length) { <span class="hljs-keyword">return</span> fn(...xs); }<br><span class="hljs-keyword">return</span> curry(fn.bind(<span class="hljs-literal">null</span>, ...xs)); }; }<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Here’s how it works. curry takes an N-arity function and returns an accumulator function. When the accumulator is invoked with k number of arguments, we check if k >= N, i.e. whether or not the function’s arity is satisfied.</p>
+<p>If it is, we invoke fn with the arguments. If not, we create a copy of fn that has k arguments partially applied and pass it to curry as the next fn, with its reduced arity of N - k.</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20201227143812-2020-12-27-14-38-13-.png" target="_blank" rel="noopener" data-caption="20201227143812-2020-12-27-14-38-13-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20201227143812-2020-12-27-14-38-13-.png" alt="20201227143812-2020-12-27-14-38-13-"></a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/12/29/Svalbard-Global-Seed-Vault/">Svalbard Global Seed Vault</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/12/12/%E4%BD%A0%E7%9A%84%E5%AE%B9%E5%99%A8%E9%9C%80%E8%A6%81%E8%AF%8A%E6%96%AD/">你的容器需要诊断</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/12/27/%E9%97%AD%E5%8C%85%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E9%97%AD%E5%8C%85/">http://catzillaorz.github.io/2020/12/27/%E9%97%AD%E5%8C%85%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E9%97%AD%E5%8C%85/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

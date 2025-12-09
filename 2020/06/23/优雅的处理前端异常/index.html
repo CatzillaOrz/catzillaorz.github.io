@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      优雅的处理前端异常 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#前端处理异常的意义"><span class="toc-text">前端处理异常的意义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#需要处理哪些异常"><span class="toc-text">需要处理哪些异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Try-Catch-的误区"><span class="toc-text">Try-Catch 的误区</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#window-addEventListener"><span class="toc-text">window.addEventListener</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Promise-Catch"><span class="toc-text">Promise Catch</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#需要注意的是：error-boundaries-并不会捕捉下面这些错误"><span class="toc-text">需要注意的是：error boundaries 并不会捕捉下面这些错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iframe-异常"><span class="toc-text">iframe 异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Script-error"><span class="toc-text">Script error</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#崩溃和卡顿"><span class="toc-text">崩溃和卡顿</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#错误上报"><span class="toc-text">错误上报</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">优雅的处理前端异常</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/06/23</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/前端">前端</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/前端">前端</a>
+                  
+                
+                  
+                    <a href="/tags/异常">异常</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="前端处理异常的意义">前端处理异常的意义<a class="post-anchor" href="#前端处理异常的意义"></a></h5><p>前端一直是距离用户最近的一层，随着产品的日益完善，我们会更加注重用户体验，而前端异常却如鲠在喉，甚是烦人。</p>
+<p>异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。</p>
+<ol>
+<li>增强用户体验；</li>
+<li>远程定位问题；</li>
+<li>未雨绸缪，及早发现问题；</li>
+<li>无法复线问题，尤其是移动端，机型，系统都是问题；</li>
+<li>完善的前端方案，前端监控系统；</li>
+</ol>
+<p>对于 JS 而言，我们面对的仅仅只是异常，异常的出现不会直接导致 JS 引擎崩溃，最多只会使当前执行的任务终止。</p>
+<h5 id="需要处理哪些异常">需要处理哪些异常<a class="post-anchor" href="#需要处理哪些异常"></a></h5><p>对于前端来说，我们可做的异常捕获还真不少。总结一下，大概如下：</p>
+<ol>
+<li>JS 语法错误、代码异常</li>
+<li>AJAX 请求异常</li>
+<li>静态资源加载异常</li>
+<li>Promise 异常</li>
+<li>Iframe 异常</li>
+<li>跨域 Script error</li>
+<li>崩溃和卡顿</li>
+</ol>
+<h5 id="Try-Catch-的误区">Try-Catch 的误区<a class="post-anchor" href="#Try-Catch-的误区"></a></h5><p>try-catch 只能捕获到同步的运行时错误，对语法和异步错误却无能为力，捕获不到。</p>
+<ol>
+<li>同步运行时错误：</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">try</span> {<br>    <span class="hljs-keyword">let</span> name = <span class="hljs-string">'mojito'</span>;<br>    <span class="hljs-built_in">console</span>.log(nam);<br>} <span class="hljs-keyword">catch</span> (e) {<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获err：'</span>, e);<br>}<br><span class="hljs-comment">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115326-2020-06-23-11-53-26-.png" target="_blank" rel="noopener" data-caption="20200623115326-2020-06-23-11-53-26-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115326-2020-06-23-11-53-26-.png" alt="20200623115326-2020-06-23-11-53-26-"></a></p>
+<ol>
+<li>不能捕获到语法错误，我们修改一下代码，删掉一个单引号</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">try</span> {<br>    <span class="hljs-keyword">let</span> name = <span class="hljs-string">'mojito;</span><br><span class="hljs-string">    console.log(nam);</span><br><span class="hljs-string">} catch(e) {</span><br><span class="hljs-string">    console.log('</span>捕获err：<span class="hljs-string">', e);</span><br><span class="hljs-string">}</span><br><span class="hljs-string">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115511-2020-06-23-11-55-12-.png" target="_blank" rel="noopener" data-caption="20200623115511-2020-06-23-11-55-12-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115511-2020-06-23-11-55-12-.png" alt="20200623115511-2020-06-23-11-55-12-"></a></p>
+<ol>
+<li>异步错误：</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">try</span> {<br>    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>        <span class="hljs-literal">undefined</span>.map(<span class="hljs-function">(<span class="hljs-params">v</span>) =></span> v);<br>    }, <span class="hljs-number">1000</span>);<br>} <span class="hljs-keyword">catch</span> (e) {<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获到异常：'</span>, e);<br>}<br><span class="hljs-comment">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115755-2020-06-23-11-57-55-.png" target="_blank" rel="noopener" data-caption="20200623115755-2020-06-23-11-57-55-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623115755-2020-06-23-11-57-55-.png" alt="20200623115755-2020-06-23-11-57-55-"></a></p>
+<p><strong>并没有捕获到异常，这是需要我们特别注意的地方。</strong></p>
+<ol>
+<li>window.onerror 不是万能的</li>
+</ol>
+<p>当 JS 运行时错误发生时，window 会触发一个 ErrorEvent 接口的 error 事件，并执行 <code>window.onerror()</code>。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623152240-2020-06-23-15-22-41-.png" target="_blank" rel="noopener" data-caption="20200623152240-2020-06-23-15-22-41-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623152240-2020-06-23-15-22-41-.png" alt="20200623152240-2020-06-23-15-22-41-"></a></p>
+<p>首先试试同步运行时错误</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623152400-2020-06-23-15-24-00-.png" target="_blank" rel="noopener" data-caption="20200623152400-2020-06-23-15-24-00-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623152400-2020-06-23-15-24-00-.png" alt="20200623152400-2020-06-23-15-24-00-"></a></p>
+<p>再试试<strong>语法</strong>错误，是否能捕获</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">window</span>.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, source, lineno, conlno, error</span>)</span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获异常：'</span>, {message, source, lineno, conlno, error})<br>}<br><span class="hljs-keyword">let</span> name = <span class="hljs-string">'mojito</span><br><span class="hljs-string">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623153200-2020-06-23-15-32-00-.png" target="_blank" rel="noopener" data-caption="20200623153200-2020-06-23-15-32-00-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623153200-2020-06-23-15-32-00-.png" alt="20200623153200-2020-06-23-15-32-00-"></a></p>
+<p>居然没有捕获到，<code>window.onerror</code></p>
+<p>再来看，<code>异步</code>操作捕获：</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">window</span>.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, source, lineno, conlno, error</span>)</span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获异常：'</span>, {message, source, lineno, conlno, error})<br>}<br>setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>    Mojito;<br>})<br><span class="hljs-comment">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>控制台：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623153610-2020-06-23-15-36-11-.png" target="_blank" rel="noopener" data-caption="20200623153610-2020-06-23-15-36-11-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623153610-2020-06-23-15-36-11-.png" alt="20200623153610-2020-06-23-15-36-11-"></a></p>
+<p>再来试试，网络请求异常情况：</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag"><<span class="hljs-name">script</span>></span><br><span class="javascript"><span class="hljs-built_in">window</span>.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, source, lineno, conlno, error</span>)</span>{</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获异常：'</span>, {message, source, lineno, conlno, error})</span><br>}<br><span class="hljs-tag"></<span class="hljs-name">script</span>></span><br><span class="hljs-tag"><<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./mojito.png"</span>></span><br>// output:<br></code></pre></td></tr></tbody></table></figure>
+
+<p>依然无法捕获，静态资源异常等错误。</p>
+<hr>
+<p>解决方案：<code>window.onerror</code> 函数只有在返回 <code>true</code> 的时候，异常才不会向上抛出，否则即使是知道异常的发生控制台还是会显示 <code>Uncaught Error: xxxxx</code></p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">window</span>.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, source, lineno, conlno, error</span>)</span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获异常：'</span>, {message, source, lineno, conlno, error})<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 返回 `true` 的时候，异常才不会向上抛出</span><br>}<br>setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>    Mojito;<br>})<br><span class="hljs-comment">// output:</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>成功捕获：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623154318-2020-06-23-15-43-19-.png" target="_blank" rel="noopener" data-caption="20200623154318-2020-06-23-15-43-19-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623154318-2020-06-23-15-43-19-.png" alt="20200623154318-2020-06-23-15-43-19-"></a></p>
+<h6 id="注意点">注意点<a class="post-anchor" href="#注意点"></a></h6><p>需要注意：</p>
+<ol>
+<li><p>onerror 最好写在所有 JS 脚本的前面，否则有可能捕获不到错误；</p>
+</li>
+<li><p>onerror 无法捕获语法错误；</p>
+</li>
+</ol>
+<ul>
+<li>结论：<ul>
+<li>到这里基本就清晰了：在实际的使用过程中，onerror 主要是来捕获预料之外的错误，而 try-catch 则是用来在可预见情况下监控特定的错误，两者结合使用更加高效。</li>
+</ul>
+</li>
+</ul>
+<p><strong>问题又来了，捕获不到静态资源加载异常怎么办？</strong></p>
+<h6 id="window-addEventListener">window.addEventListener<a class="post-anchor" href="#window-addEventListener"></a></h6><p>当一项资源（如图片或脚本）加载失败，加载资源的元素会触发一个 Event 接口的 error 事件，并执行该元素上的 onerror() 处理函数。这些 error 事件不会向上冒泡到 window ，不过（至少在 Firefox 中）能被单一的 window.addEventListener 捕获。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag"><<span class="hljs-name">script</span>></span><br><span class="javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">'error'</span>, (error)  => {</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'捕获异常：'</span>, error)</span><br><span class="actionscript">}, <span class="hljs-literal">true</span>)</span><br><span class="hljs-tag"></<span class="hljs-name">script</span>></span><br><span class="hljs-tag"><<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./mojito.png"</span>></span><br>// output:<br></code></pre></td></tr></tbody></table></figure>
+
+<p>控制台输出</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623154811-2020-06-23-15-48-11-.png" target="_blank" rel="noopener" data-caption="20200623154811-2020-06-23-15-48-11-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623154811-2020-06-23-15-48-11-.png" alt="20200623154811-2020-06-23-15-48-11-"></a></p>
+<p>由于网络请求异常不会事件冒泡，因此必须在捕获阶段将其捕捉到才行，但是这种方式虽然可以捕捉到网络请求的异常，但是无法判断 HTTP 的状态是 404 还是其他比如 500 等等，所以还需要配合服务端日志才进行排查分析才可以。</p>
+<p><strong>需要注意:</strong></p>
+<ul>
+<li>不同浏览器下返回的 error 对象可能不同，需要注意兼容处理。</li>
+<li>需要注意避免 addEventListener 重复监听。</li>
+</ul>
+<h5 id="Promise-Catch">Promise Catch<a class="post-anchor" href="#Promise-Catch"></a></h5><p>在 promise 中使用 catch 可以非常方便的捕获到异步 error ，这个很简单。没有写 catch 的 Promise 中抛出的错误无法被 onerror 或 try-catch 捕获到，所以我们务必要在 Promise 中不要忘记写 catch 处理抛出的异常。</p>
+<p>解决方案：为了防止有漏掉的 Promise 异常，建议在全局增加一个对 unhandledrejection 的监听，用来全局监听Uncaught Promise Error。使用方式：</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">"unhandledrejection"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{<br>    <span class="hljs-built_in">console</span>.log(e);<br>})<br></code></pre></td></tr></tbody></table></figure>
+
+<p>在增加监听后，我们继续来尝试一下， 不对promis进行catch：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623155345-2020-06-23-15-53-45-.png" target="_blank" rel="noopener" data-caption="20200623155345-2020-06-23-15-53-45-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623155345-2020-06-23-15-53-45-.png" alt="20200623155345-2020-06-23-15-53-45-"></a></p>
+<p>所以，正如我们上面所说，为了防止有漏掉的 Promise 异常，建议在全局增加一个对 unhandledrejection 的监听，用来全局监听 Uncaught Promise Error。</p>
+<p>补充一点：如果去掉控制台的异常显示，需要加上：</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js">event.preventDefault();<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="需要注意的是：error-boundaries-并不会捕捉下面这些错误">需要注意的是：error boundaries 并不会捕捉下面这些错误<a class="post-anchor" href="#需要注意的是：error-boundaries-并不会捕捉下面这些错误"></a></h5><ul>
+<li><p>事件处理器</p>
+</li>
+<li><p>异步代码</p>
+</li>
+<li><p>服务端的渲染代码</p>
+</li>
+<li><p>在 error boundaries 区域内的错误</p>
+</li>
+</ul>
+<p>我们来举一个小例子，在下面这个 componentDIdCatch(error,info) 里的类会变成一个 error boundary：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623155732-2020-06-23-15-57-33-.png" target="_blank" rel="noopener" data-caption="20200623155732-2020-06-23-15-57-33-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623155732-2020-06-23-15-57-33-.png" alt="20200623155732-2020-06-23-15-57-33-"></a></p>
+<p>然后我们像使用普通组件那样使用它：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160215-2020-06-23-16-02-16-.png" target="_blank" rel="noopener" data-caption="20200623160215-2020-06-23-16-02-16-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160215-2020-06-23-16-02-16-.png" alt="20200623160215-2020-06-23-16-02-16-"></a></p>
+<p>componentDidCatch() 方法像 JS 的 catch{} 模块一样工作，但是对于组件，只有 class 类型的组件(class component )可以成为一个 error boundaries 。</p>
+<p>实际上，大多数情况下我们可以在整个程序中定义一个 error boundary 组件，之后就可以一直使用它了！</p>
+<h5 id="iframe-异常">iframe 异常<a class="post-anchor" href="#iframe-异常"></a></h5><p>对于 iframe 的异常捕获，我们还得借力 window.onerror：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160339-2020-06-23-16-03-39-.png" target="_blank" rel="noopener" data-caption="20200623160339-2020-06-23-16-03-39-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160339-2020-06-23-16-03-39-.png" alt="20200623160339-2020-06-23-16-03-39-"></a></p>
+<h5 id="Script-error">Script error<a class="post-anchor" href="#Script-error"></a></h5><p>一般情况，如果出现 Script error 这样的错误，基本上可以确定是出现了跨域问题。这时候，是不会有其他太多辅助信息的，但是解决思路无非如下：</p>
+<p>跨源资源共享机制( CORS )：我们为 script 标签添加 crossOrigin 属性。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160453-2020-06-23-16-04-53-.png" target="_blank" rel="noopener" data-caption="20200623160453-2020-06-23-16-04-53-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160453-2020-06-23-16-04-53-.png" alt="20200623160453-2020-06-23-16-04-53-"></a></p>
+<p>或者动态去添加 js 脚本：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160506-2020-06-23-16-05-06-.png" target="_blank" rel="noopener" data-caption="20200623160506-2020-06-23-16-05-06-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160506-2020-06-23-16-05-06-.png" alt="20200623160506-2020-06-23-16-05-06-"></a></p>
+<p><strong>特别注意，服务器端需要设置：Access-Control-Allow-Origin</strong></p>
+<p>此外，我们也可以试试这个-解决 Script Error 的另类思路：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160717-2020-06-23-16-07-18-.png" target="_blank" rel="noopener" data-caption="20200623160717-2020-06-23-16-07-18-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160717-2020-06-23-16-07-18-.png" alt="20200623160717-2020-06-23-16-07-18-"></a></p>
+<p>简单解释一下：</p>
+<p>改写了 EventTarget 的 addEventListener 方法；</p>
+<p>对传入的 listener 进行包装，返回包装过的 listener，对其执行进行 try-catch；</p>
+<p>浏览器不会对 try-catch 起来的异常进行跨域拦截，所以 catch 到的时候，是有堆栈信息的；</p>
+<p>重新 throw 出来异常的时候，执行的是同域代码，所以 window.onerror 捕获的时候不会丢失堆栈信息；</p>
+<p>利用包装 addEventListener，我们还可以达到「扩展堆栈」的效果：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160944-2020-06-23-16-09-44-.png" target="_blank" rel="noopener" data-caption="20200623160944-2020-06-23-16-09-44-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623160944-2020-06-23-16-09-44-.png" alt="20200623160944-2020-06-23-16-09-44-"></a></p>
+<h5 id="崩溃和卡顿">崩溃和卡顿<a class="post-anchor" href="#崩溃和卡顿"></a></h5><p>卡顿也就是网页暂时响应比较慢， JS 可能无法及时执行。但崩溃就不一样了，网页都崩溃了，JS 都不运行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？</p>
+<p>崩溃和卡顿也是不可忽视的，也许会导致你的用户流失。</p>
+<p>利用 window 对象的 load 和 beforeunload 事件实现了网页崩溃的监控。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623161031-2020-06-23-16-10-31-.png" target="_blank" rel="noopener" data-caption="20200623161031-2020-06-23-16-10-31-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200623161031-2020-06-23-16-10-31-.png" alt="20200623161031-2020-06-23-16-10-31-"></a></p>
+<p>基于以下原因，我们可以使用 Service Worker 来实现网页崩溃的监控：</p>
+<ul>
+<li><p>Service Worker 有自己独立的工作线程，与网页区分开，网页崩溃了，Service Worker 一般情况下不会崩溃；</p>
+</li>
+<li><p>Service Worker 生命周期一般要比网页还要长，可以用来监控网页的状态；</p>
+</li>
+<li><p>网页可以通过 navigator.serviceWorker.controller.postMessage API 向掌管自己的 SW 发送消息。</p>
+</li>
+</ul>
+<h5 id="错误上报">错误上报<a class="post-anchor" href="#错误上报"></a></h5><ol>
+<li>通过 Ajax 发送数据:</li>
+</ol>
+<p><strong>因为 Ajax 请求本身也有可能会发生异常，而且有可能会引发跨域问题，一般情况下更推荐使用动态创建 img 标签的形式进行上报。</strong></p>
+<ol>
+<li>动态创建 img 标签的形式:</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">report</span>(<span class="hljs-params"></span>)</span>{<br>    <span class="hljs-keyword">let</span> reportUrl = <span class="hljs-string">"http://mojito.com/report"</span>;<br>    <span class="hljs-keyword">new</span> Image().src = <span class="hljs-string">`<span class="hljs-subst">${reportUrl}</span>?logs=<span class="hljs-subst">${error}</span>`</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>收集异常信息量太多，怎么办？实际中，我们不得不考虑这样一种情况：如果你的网站访问量很大，那么一个必然的错误发送的信息就有很多条，这时候，我们需要设置采集率，从而减缓服务器的压力:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js">Reporter.send = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{<br>    <span class="hljs-comment">// 只采集 30%</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">Math</span>.random() < <span class="hljs-number">0.3</span> ){<br>        send(data); <span class="hljs-comment">// 上报错误</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>采集率应该通过实际情况来设定，随机数，或者某些用户特征都是不错的选择。</p>
+<h5 id="总结">总结<a class="post-anchor" href="#总结"></a></h5><p>回到我们开头提出的那个问题，如何优雅的处理异常呢？</p>
+<ol>
+<li><p>可疑区域增加 Try-Catch</p>
+</li>
+<li><p>全局监控 JS 异常 window.onerror</p>
+</li>
+<li><p>全局监控静态资源异常 window.addEventListener</p>
+</li>
+<li><p>捕获没有 Catch 的 Promise 异常：unhandledrejection</p>
+</li>
+<li><p>VUE errorHandler 和 React componentDidCatch</p>
+</li>
+<li><p>监控网页崩溃：window 对象的 load 和 beforeunload</p>
+</li>
+<li><p>跨域 crossOrigin 解决</p>
+</li>
+</ol>
+<p>其实很简单，采用组合方案，分类型的去捕获异常，这样基本 80%-90% 的问题都化于无形。</p>
+<blockquote>
+<p>原作者：coding小姐姐，<br>仅对部分内容进行了修改<br>原文链接：<a href="https://segmentfault.com/a/1190000018754274" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018754274</a></p>
+</blockquote>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/07/14/%E5%90%89%E4%BB%96%E4%B9%90%E7%90%86%E5%9B%9B-%E5%A4%A7%E8%B0%83%E5%92%8C%E5%BC%A6/">Guitar Music Theory Four - Major Chords</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/06/19/%E6%89%98%E7%A6%8F%E5%86%99%E4%BD%9C-%E5%8A%A0%E5%88%86%E5%8F%A540%E5%8F%A5/">托福写作-加分句40句</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/06/23/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/">http://catzillaorz.github.io/2020/06/23/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

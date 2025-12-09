@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      熵增定律 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#熵增定律"><span class="toc-text">熵增定律</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是熵增定律"><span class="toc-text">什么是熵增定律</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#企业"><span class="toc-text">企业</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#个人"><span class="toc-text">个人</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#熵增无好坏之分"><span class="toc-text">熵增无好坏之分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#无序只是概率事件"><span class="toc-text">无序只是概率事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#意义是针对参考系而言的"><span class="toc-text">意义是针对参考系而言的</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#More"><span class="toc-text">More</span></a>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">熵增定律</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/03/01</span>
+        </span>
+
+        
+
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/熵增">熵增</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="熵增定律">熵增定律<a class="post-anchor" href="#熵增定律"></a></h5><blockquote>
+<p>如果物理学只能留一条定律，我会留熵增定律</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153004-2021-03-01-15-30-04-.png" target="_blank" rel="noopener" data-caption="20210301153004-2021-03-01-15-30-04-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153004-2021-03-01-15-30-04-.png" alt="20210301153004-2021-03-01-15-30-04-"></a></p>
+<blockquote>
+<p>吴军老师给出的答案是三个公式：</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153044-2021-03-01-15-30-45-.png" target="_blank" rel="noopener" data-caption="20210301153044-2021-03-01-15-30-45-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153044-2021-03-01-15-30-45-.png" alt="20210301153044-2021-03-01-15-30-45-"></a></p>
+<blockquote>
+<p>爱丁顿爵士也曾说：“我认为，熵增原则是自然界所有定律中至高无上的。如果有人指出你的宇宙理论与麦克斯韦方程不符，那么麦克斯韦方程可能有不对；如果你的宇宙理论与观测相矛盾，嗯，观测的人有时也会把事情搞错；但是如果你的理论违背了热力学第二定律，我就敢说你没有指望了，你的理论只有丢尽脸、垮台。</p>
+</blockquote>
+<p><a href="https://mp.weixin.qq.com/s/6jQ-MuukVekuCzXBuqzF5A" target="_blank" rel="noopener">宇宙未来</a></p>
+<blockquote>
+<p>生命与群体：比如大公司的组织架构会变得臃肿，员工会变得官僚化，整体效率和创新能力也会下降；封闭的国家会被世界淘汰。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153454-2021-03-01-15-34-55-.png" target="_blank" rel="noopener" data-caption="20210301153454-2021-03-01-15-34-55-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153454-2021-03-01-15-34-55-.png" alt="20210301153454-2021-03-01-15-34-55-"></a></p>
+<h5 id="什么是熵增定律">什么是熵增定律<a class="post-anchor" href="#什么是熵增定律"></a></h5><blockquote>
+<p>定义：在一个孤立系统里，如果没有外力做功，其总混乱度（熵）会不断增大。</p>
+<p>这里面有三个词非常重要：孤立系统、无外力做功、总混乱度（熵）。</p>
+<p>首先我们来解释什么是熵。</p>
+<p>熵（Entropy），最早在1865年由德国物理学家克劳修斯提出，用以度量一个系统“内在的混乱程度”。</p>
+<p>你可以理解为，系统中的无效能量。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153617-2021-03-01-15-36-18-.png" target="_blank" rel="noopener" data-caption="20210301153617-2021-03-01-15-36-18-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153617-2021-03-01-15-36-18-.png" alt="20210301153617-2021-03-01-15-36-18-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153630-2021-03-01-15-36-31-.png" target="_blank" rel="noopener" data-caption="20210301153630-2021-03-01-15-36-31-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153630-2021-03-01-15-36-31-.png" alt="20210301153630-2021-03-01-15-36-31-"></a></p>
+<blockquote>
+<p>任何一个系统，只要满足封闭系统，而且无外力维持，它就会趋于混乱和无序。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153653-2021-03-01-15-36-53-.png" target="_blank" rel="noopener" data-caption="20210301153653-2021-03-01-15-36-53-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153653-2021-03-01-15-36-53-.png" alt="20210301153653-2021-03-01-15-36-53-"></a></p>
+<blockquote>
+<p>如何对抗熵增，实现超越</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153705-2021-03-01-15-37-05-.png" target="_blank" rel="noopener" data-caption="20210301153705-2021-03-01-15-37-05-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153705-2021-03-01-15-37-05-.png" alt="20210301153705-2021-03-01-15-37-05-"></a></p>
+<blockquote>
+<p>也许我们可以从生命里得到启示，整个生命的发展就是一部负熵的历史。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153741-2021-03-01-15-37-42-.png" target="_blank" rel="noopener" data-caption="20210301153741-2021-03-01-15-37-42-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153741-2021-03-01-15-37-42-.png" alt="20210301153741-2021-03-01-15-37-42-"></a></p>
+<blockquote>
+<p>即生命的熵减过程，会加剧环境的熵增，于是环境会变得越来越恶劣，生命为了生存，为了获得足够的能量和物质，必须变得更加智能……</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153817-2021-03-01-15-38-17-.png" target="_blank" rel="noopener" data-caption="20210301153817-2021-03-01-15-38-17-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153817-2021-03-01-15-38-17-.png" alt="20210301153817-2021-03-01-15-38-17-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153837-2021-03-01-15-38-37-.png" target="_blank" rel="noopener" data-caption="20210301153837-2021-03-01-15-38-37-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153837-2021-03-01-15-38-37-.png" alt="20210301153837-2021-03-01-15-38-37-"></a></p>
+<h5 id="企业">企业<a class="post-anchor" href="#企业"></a></h5><ol>
+<li>主动做功</li>
+</ol>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153902-2021-03-01-15-39-02-.png" target="_blank" rel="noopener" data-caption="20210301153902-2021-03-01-15-39-02-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301153902-2021-03-01-15-39-02-.png" alt="20210301153902-2021-03-01-15-39-02-"></a></p>
+<ol>
+<li>开放系统</li>
+</ol>
+<blockquote>
+<p>你可以理解为，系统把无用的熵排出去，然后吸收新的可用物质、能量和信息。</p>
+<p>注：熵有三种，物质熵、能量熵、信息熵，在相对论里物质和能量是一回事，但是为了理解，这里我们把它分开。</p>
+<p>比如你每天的新陈代谢，比如你通过锻炼减去一身的赘肉，比如你看一本好书。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154040-2021-03-01-15-40-40-.png" target="_blank" rel="noopener" data-caption="20210301154040-2021-03-01-15-40-40-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154040-2021-03-01-15-40-40-.png" alt="20210301154040-2021-03-01-15-40-40-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154207-2021-03-01-15-42-08-.png" target="_blank" rel="noopener" data-caption="20210301154207-2021-03-01-15-42-08-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154207-2021-03-01-15-42-08-.png" alt="20210301154207-2021-03-01-15-42-08-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154217-2021-03-01-15-42-17-.png" target="_blank" rel="noopener" data-caption="20210301154217-2021-03-01-15-42-17-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154217-2021-03-01-15-42-17-.png" alt="20210301154217-2021-03-01-15-42-17-"></a></p>
+<h5 id="个人">个人<a class="post-anchor" href="#个人"></a></h5><p>也许你会觉得自己还达不到在企业里运用熵增定律的高度，没关系，熵增定律也同样适用于你个人的发展。</p>
+<p>比如工作、生活、学习、心情、成长、人际关系等等都与此相关。</p>
+<blockquote>
+<p>这种状态就是生活陷入了极度的熵增状态，被无数的混乱的事情牵着走，丧失了生活的掌控权。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154329-2021-03-01-15-43-29-.png" target="_blank" rel="noopener" data-caption="20210301154329-2021-03-01-15-43-29-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154329-2021-03-01-15-43-29-.png" alt="20210301154329-2021-03-01-15-43-29-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154337-2021-03-01-15-43-38-.png" target="_blank" rel="noopener" data-caption="20210301154337-2021-03-01-15-43-38-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154337-2021-03-01-15-43-38-.png" alt="20210301154337-2021-03-01-15-43-38-"></a></p>
+<ol>
+<li>主动做功</li>
+</ol>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154443-2021-03-01-15-44-43-.png" target="_blank" rel="noopener" data-caption="20210301154443-2021-03-01-15-44-43-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154443-2021-03-01-15-44-43-.png" alt="20210301154443-2021-03-01-15-44-43-"></a></p>
+<blockquote>
+<p>痛苦着痛苦着，突然「熵增定律」闯进了我的脑海，让知识变得有序的过程不正是熵减的过程吗？</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154451-2021-03-01-15-44-51-.png" target="_blank" rel="noopener" data-caption="20210301154451-2021-03-01-15-44-51-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301154451-2021-03-01-15-44-51-.png" alt="20210301154451-2021-03-01-15-44-51-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155311-2021-03-01-15-53-11-.png" target="_blank" rel="noopener" data-caption="20210301155311-2021-03-01-15-53-11-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155311-2021-03-01-15-53-11-.png" alt="20210301155311-2021-03-01-15-53-11-"></a></p>
+<ol>
+<li>开放系统</li>
+</ol>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155331-2021-03-01-15-53-31-.png" target="_blank" rel="noopener" data-caption="20210301155331-2021-03-01-15-53-31-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155331-2021-03-01-15-53-31-.png" alt="20210301155331-2021-03-01-15-53-31-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155343-2021-03-01-15-53-43-.png" target="_blank" rel="noopener" data-caption="20210301155343-2021-03-01-15-53-43-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155343-2021-03-01-15-53-43-.png" alt="20210301155343-2021-03-01-15-53-43-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155428-2021-03-01-15-54-29-.png" target="_blank" rel="noopener" data-caption="20210301155428-2021-03-01-15-54-29-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155428-2021-03-01-15-54-29-.png" alt="20210301155428-2021-03-01-15-54-29-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155437-2021-03-01-15-54-37-.png" target="_blank" rel="noopener" data-caption="20210301155437-2021-03-01-15-54-37-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155437-2021-03-01-15-54-37-.png" alt="20210301155437-2021-03-01-15-54-37-"></a></p>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155448-2021-03-01-15-54-48-.png" target="_blank" rel="noopener" data-caption="20210301155448-2021-03-01-15-54-48-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155448-2021-03-01-15-54-48-.png" alt="20210301155448-2021-03-01-15-54-48-"></a></p>
+<blockquote>
+<p>答案是降低信息熵。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155506-2021-03-01-15-55-06-.png" target="_blank" rel="noopener" data-caption="20210301155506-2021-03-01-15-55-06-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155506-2021-03-01-15-55-06-.png" alt="20210301155506-2021-03-01-15-55-06-"></a></p>
+<blockquote>
+<p>我这辈子遇到的聪明人，没有不每天阅读的，没有，一个都没有。沃伦读书之多，我读书之多，可能会让你感到吃惊。</p>
+<p>智能充当的角色，就是从无序中发现有序，减少大量的瞎几把做功。</p>
+</blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155605-2021-03-01-15-56-05-.png" target="_blank" rel="noopener" data-caption="20210301155605-2021-03-01-15-56-05-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155605-2021-03-01-15-56-05-.png" alt="20210301155605-2021-03-01-15-56-05-"></a></p>
+<h5 id="熵增无好坏之分">熵增无好坏之分<a class="post-anchor" href="#熵增无好坏之分"></a></h5><p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155627-2021-03-01-15-56-28-.png" target="_blank" rel="noopener" data-caption="20210301155627-2021-03-01-15-56-28-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155627-2021-03-01-15-56-28-.png" alt="20210301155627-2021-03-01-15-56-28-"></a></p>
+<h5 id="无序只是概率事件">无序只是概率事件<a class="post-anchor" href="#无序只是概率事件"></a></h5><p><a href="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155653-2021-03-01-15-56-54-.png" target="_blank" rel="noopener" data-caption="20210301155653-2021-03-01-15-56-54-" data-fancybox="images"><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20210301155653-2021-03-01-15-56-54-.png" alt="20210301155653-2021-03-01-15-56-54-"></a></p>
+<h5 id="意义是针对参考系而言的">意义是针对参考系而言的<a class="post-anchor" href="#意义是针对参考系而言的"></a></h5><blockquote>
+<p>对于宇宙而言，人类的存在确实没有意义；但对于人类而言，你的存在就有意义。</p>
+</blockquote>
+<h2 id="More">More<a class="post-anchor" href="#More"></a></h2><p><a href="https://mp.weixin.qq.com/s/6jQ-MuukVekuCzXBuqzF5A" target="_blank" rel="noopener">延伸阅读</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/03/03/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF%E5%8F%91%E5%B1%95%E4%BD%93%E7%B3%BB/">如何构建个人成长发展体系</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/01/15/CSS%E6%A1%86%E6%9E%B6%E6%8E%92%E8%A1%8C%E6%A6%9C/">CSS框架排行榜</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2021/03/01/%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/">http://catzillaorz.github.io/2021/03/01/%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

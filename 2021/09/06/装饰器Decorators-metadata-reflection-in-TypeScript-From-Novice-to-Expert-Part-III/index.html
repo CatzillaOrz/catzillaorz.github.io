@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      装饰器Decorators &amp; metadata reflection in TypeScript: From Novice to Expert (Part III) - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#PART-III-Parameter-decorators-amp-Decorator-factory"><span class="toc-text">PART III: Parameter decorators &amp; Decorator factory</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Parameter-decorators"><span class="toc-text">Parameter decorators</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Decorator-factory"><span class="toc-text">Decorator factory</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Configurable-decorators"><span class="toc-text">Configurable decorators</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Conclusion"><span class="toc-text">Conclusion</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">装饰器Decorators & metadata reflection in TypeScript: From Novice to Expert (Part III)</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/09/06</span>
+        </span>
+
+        
+
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/TS">TS</a>
+                  
+                
+                  
+                    <a href="/tags/Decorators">Decorators</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="PART-III-Parameter-decorators-amp-Decorator-factory">PART III: Parameter decorators & Decorator factory<a class="post-anchor" href="#PART-III-Parameter-decorators-amp-Decorator-factory"></a></h5><ul>
+<li><p><a href="http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-3" target="_blank" rel="noopener">参数装饰器 & 工厂装饰器</a></p>
+</li>
+<li><p>这部分没有前两部分内容翔实，点到为止，更多的实践，还需要自行深入学习。</p>
+</li>
+<li><p>In the previous post in this series we learned what are decorators and how they are implemented in TypeScript. We know how to work with class, method and property decorators.</p>
+</li>
+<li><p>In this post we will learn about:</p>
+</li>
+<li><p>The remaining type of decorator: the parameter decorator.<br>How to implement a decorator factory.<br>How to implement configurable decorators.<br>We are going to use the following class to showcase these concepts.</p>
+</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> Person {<br><br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-keyword">public</span> surname: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name : <span class="hljs-built_in">string</span>, surname : <span class="hljs-built_in">string</span></span>) {<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.surname = surname;<br>  }<br><br>  <span class="hljs-keyword">public</span> saySomething(something : <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.surname + <span class="hljs-string">" says: "</span> + something;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Parameter-decorators">Parameter decorators<a class="post-anchor" href="#Parameter-decorators"></a></h6><ul>
+<li>As we already know, the signature of a ParameterDecorator looks as follows.</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">type</span> ParameterDecorator = <span class="hljs-function">(<span class="hljs-params">target: <span class="hljs-built_in">Object</span>, propertyKey: <span class="hljs-built_in">string</span> | symbol, parameterIndex: <span class="hljs-built_in">number</span></span>) =></span> <span class="hljs-built_in">void</span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>We can use a parameter decorator named <code>logParameter</code> as follows:</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> Person {<br><br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-keyword">public</span> surname: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name : <span class="hljs-built_in">string</span>, surname : <span class="hljs-built_in">string</span></span>) {<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.surname = surname;<br>  }<br><br>  <span class="hljs-keyword">public</span> saySomething(<span class="hljs-meta">@logParameter</span> something : <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.surname + <span class="hljs-string">" says: "</span> + something;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>When compiled into JavaScript the <code>__decorate</code> method (which we explained in PART I) is invoked here.</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-built_in">Object</span>.defineProperty(Person.prototype, <span class="hljs-string">"saySomething"</span>,<br>       __decorate([<br>           __param(<span class="hljs-number">0</span>, logParameter)<br>       ], Person.prototype, <span class="hljs-string">"saySomething"</span>, <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(Person.prototype, <span class="hljs-string">"saySomething"</span>)));<br>   <span class="hljs-keyword">return</span> Person;<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>If we compare it with the previous decorators we could assume that because the Object.defineProperty() is invoked, the method saySomething will be replaced by the value returned by the <code>__decorated</code> function (like in the method decorator). This assumption is wrong.</p>
+</li>
+<li><p>If we examine the code snippet above, we will notice that there is a new function named <code>__param</code>.</p>
+</li>
+<li><p>The <code>__param</code> function is generated by the TypeScript compiler and looks as follows:</p>
+</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">var</span> __param = <span class="hljs-keyword">this</span>.__param || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">index, decorator</span>) </span>{<br><br>    <span class="hljs-comment">// return a decorator function (wrapper)</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">target, key</span>) </span>{<br><br>        <span class="hljs-comment">// apply decorator (return is ignored)</span><br>        decorator(target, key, index);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>The <code>__param</code> function returns a decorator that wraps the parameter decorator (refereed as decorator).</p>
+</li>
+<li><p>As we can see when the parameter decorator is invoked, its return is ignored. This means that when the <code>__decorate</code> function is invoked, its return will not be used to override the saySomething method .</p>
+</li>
+<li><p>This is the reason why <strong>parameter decorators don’t return.</strong></p>
+</li>
+<li><p>The decorator wrapper in <code>__param</code> is used to store the index of the parameter in a closure. The index is just the position in the list of arguments.</p>
+</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> foo {<br>  <span class="hljs-comment">// foo index === 0</span><br>  <span class="hljs-keyword">public</span> foo(<span class="hljs-meta">@logParameter</span> foo: <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">"bar"</span>;<br>  }<br>  <span class="hljs-comment">// bar index === 1</span><br>  <span class="hljs-keyword">public</span> foobar(foo: <span class="hljs-built_in">string</span>, <span class="hljs-meta">@logParameter</span> bar: <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">"foobar"</span>;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>Now we know that <strong>a parameter decorator takes 3 parameters:</strong></p>
+</li>
+<li><p>The prototype of the class being decorated.</p>
+</li>
+<li><p>The name of the method that contains the parameter being decorated.</p>
+</li>
+<li><p>The index of that parameter being decorated.</p>
+</li>
+<li><p>Let’s implement the logProperty decorator.</p>
+</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logParameter</span>(<span class="hljs-params">target: <span class="hljs-built_in">any</span>, key : <span class="hljs-built_in">string</span>, index : <span class="hljs-built_in">number</span></span>) </span>{<br>  <span class="hljs-keyword">var</span> metadataKey = <span class="hljs-string">`log_<span class="hljs-subst">${key}</span>_parameters`</span>;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(target[metadataKey])) {<br>    target[metadataKey].push(index);<br>  }<br>  <span class="hljs-keyword">else</span> {<br>    target[metadataKey] = [index];<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>The parameter decorator above adds a new property (metadataKey) to the class prototype. The new property is an array and contains the indices of the parameters being decorated. We can consider this new property as <strong>metadata</strong>.</p>
+</li>
+<li><p>A parameter decorator is not supposed to modify the behavior of a constructor, method or property. <strong>A parameter decorator should only be used to generate some sort of metadata.</strong></p>
+</li>
+<li><p>Once the metadata has been created we can use another decorator to read it. For example, in the example bellow we can find and updated version of the method decorator that we created in PART II.</p>
+</li>
+<li><p>The original version logged in console the function name and all its arguments when it was invoked.</p>
+</li>
+<li><p>The new version <strong>reads the metadata</strong> to log in console only the parameters that have been decorated using the parameter decorator.</p>
+</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> Person {<br><br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-keyword">public</span> surname: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name : <span class="hljs-built_in">string</span>, surname : <span class="hljs-built_in">string</span></span>) {<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.surname = surname;<br>  }<br><br>  <span class="hljs-meta">@logMethod</span><br>  <span class="hljs-keyword">public</span> saySomething(<span class="hljs-meta">@logParameter</span> something : <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.surname + <span class="hljs-string">" says: "</span> + something;<br>  }<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logMethod</span>(<span class="hljs-params">target: <span class="hljs-built_in">Function</span>, key: <span class="hljs-built_in">string</span>, descriptor: <span class="hljs-built_in">any</span></span>) </span>{<br>  <span class="hljs-keyword">var</span> originalMethod = descriptor.value;<br>  descriptor.value = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">...args: <span class="hljs-built_in">any</span>[]</span>) </span>{<br><br>    <span class="hljs-keyword">var</span> metadataKey = <span class="hljs-string">`__log_<span class="hljs-subst">${key}</span>_parameters`</span>;<br>    <span class="hljs-keyword">var</span> indices = target[metadataKey];<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(indices)) {<br><br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < args.length; i++) {<br><br>        <span class="hljs-keyword">if</span> (indices.indexOf(i) !== <span class="hljs-number">-1</span>) {<br><br>          <span class="hljs-keyword">var</span> arg = args[i];<br>          <span class="hljs-keyword">var</span> argStr = <span class="hljs-built_in">JSON</span>.stringify(arg) || arg.toString();<br>          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${key}</span> arg[<span class="hljs-subst">${i}</span>]: <span class="hljs-subst">${argStr}</span>`</span>);<br>        }<br>      }<br>      <span class="hljs-keyword">var</span> result = originalMethod.apply(<span class="hljs-keyword">this</span>, args);<br>      <span class="hljs-keyword">return</span> result;<br>    }<br>    <span class="hljs-keyword">else</span> {<br><br>      <span class="hljs-keyword">var</span> a = args.map(<span class="hljs-function"><span class="hljs-params">a</span> =></span> (<span class="hljs-built_in">JSON</span>.stringify(a) || a.toString())).join();<br>      <span class="hljs-keyword">var</span> result = originalMethod.apply(<span class="hljs-keyword">this</span>, args);<br>      <span class="hljs-keyword">var</span> r = <span class="hljs-built_in">JSON</span>.stringify(result);<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Call: <span class="hljs-subst">${key}</span>(<span class="hljs-subst">${a}</span>) => <span class="hljs-subst">${r}</span>`</span>);<br>      <span class="hljs-keyword">return</span> result;<br>    }<br>  }<br>  <span class="hljs-keyword">return</span> descriptor;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>In the PART IV of this series we will learn a better way to work with metadata: <strong>The metadata reflection API.</strong> The bellow is just a sneak peek of what we will learn.</p>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logParameter</span>(<span class="hljs-params">target: <span class="hljs-built_in">any</span>, key: <span class="hljs-built_in">string</span>, index: <span class="hljs-built_in">number</span></span>) </span>{<br>  <span class="hljs-keyword">var</span> indices = Reflect.getMetadata(<span class="hljs-string">`log_<span class="hljs-subst">${key}</span>_parameters`</span>, target, key) || [];<br>  indices.push(index);<br>  Reflect.defineMetadata(<span class="hljs-string">`log_<span class="hljs-subst">${key}</span>_parameters`</span>, indices, target, key);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Decorator-factory">Decorator factory<a class="post-anchor" href="#Decorator-factory"></a></h6><p>The official TypeScript decorators proposal defines a decorator factory as follows:</p>
+<blockquote>
+<p>A decorator factory is a function that can accept any number of arguments, and must return one of the types of decorator.</p>
+</blockquote>
+<ul>
+<li>We have learned how to implement and consume all the available types of decorator (class, method, property and parameter) but there is something that we can improve. Let’s consider the following code snippet:</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@logClass</span><br><span class="hljs-keyword">class</span> Person {<br><br>  <span class="hljs-meta">@logProperty</span><br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">public</span> surname: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name : <span class="hljs-built_in">string</span>, surname : <span class="hljs-built_in">string</span></span>) {<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.surname = surname;<br>  }<br><br>  <span class="hljs-meta">@logMethod</span><br>  <span class="hljs-keyword">public</span> saySomething(<span class="hljs-meta">@logParameter</span> something : <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.surname + <span class="hljs-string">" says: "</span> + something;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>The above works but it would be better if we could just <strong>consume a decorator everywhere without having to worry about its type</strong> as follows:</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@log</span><br><span class="hljs-keyword">class</span> Person {<br><br>  <span class="hljs-meta">@log</span><br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">public</span> surname: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name : <span class="hljs-built_in">string</span>, surname : <span class="hljs-built_in">string</span></span>) {<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.surname = surname;<br>  }<br><br>  <span class="hljs-meta">@log</span><br>  <span class="hljs-keyword">public</span> saySomething(<span class="hljs-meta">@log</span> something : <span class="hljs-built_in">string</span>) : <span class="hljs-built_in">string</span> {<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">" "</span> + <span class="hljs-keyword">this</span>.surname + <span class="hljs-string">" says: "</span> + something;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>We can achieve this by wrapping all the decorators with a decorator factory. The decorator factory is able to identify what type of decorator is required by checking the arguments passed to the decorator:</li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">...args : <span class="hljs-built_in">any</span>[]</span>) </span>{<br>  <span class="hljs-keyword">switch</span>(args.length) {<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>      <span class="hljs-keyword">return</span> logClass.apply(<span class="hljs-keyword">this</span>, args);<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>      <span class="hljs-keyword">return</span> logProperty.apply(<span class="hljs-keyword">this</span>, args);<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>      <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> args[<span class="hljs-number">2</span>] === <span class="hljs-string">"number"</span>) {<br>        <span class="hljs-keyword">return</span> logParameter.apply(<span class="hljs-keyword">this</span>, args);<br>      }<br>      <span class="hljs-keyword">return</span> logMethod.apply(<span class="hljs-keyword">this</span>, args);<br>    <span class="hljs-keyword">default</span>:<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Decorators are not valid here!"</span>);<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="Configurable-decorators">Configurable decorators<a class="post-anchor" href="#Configurable-decorators"></a></h6><ul>
+<li>The last thing that we will learn in this post is how to allow developers to <strong>pass arguments to a decorator when it is consumed.</strong></li>
+</ul>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-meta">@logClassWithArgs</span>({ when : { name : <span class="hljs-string">"remo"</span>} })<br><span class="hljs-keyword">class</span> Person {<br>  <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>;<br><br>  <span class="hljs-comment">// ...</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>We can use a decorator factory to create configurable decorators.</p>
+<figure class="highlight ts"><table><tbody><tr><td class="code"><pre><code class="hljs ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logClassWithArgs</span>(<span class="hljs-params">filter: <span class="hljs-built_in">Object</span></span>) </span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">target: <span class="hljs-built_in">Object</span></span>) =></span> {<br>        <span class="hljs-comment">// implement class decorator here, the class decorator</span><br>        <span class="hljs-comment">// will have access to the decorator arguments (filter)</span><br>        <span class="hljs-comment">// because they are  stored in a closure</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>We can apply the same idea to the other decorator types (method, property and parameter) to make them configurable.</li>
+</ul>
+<h6 id="Conclusion">Conclusion<a class="post-anchor" href="#Conclusion"></a></h6><p>We now understand in-depth 4 out of the 4 available types of decorators, how to create a decorator factory and how to use a decorator factory to implement configurable decorators.</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/09/06/%E8%A3%85%E9%A5%B0%E5%99%A8Decorators-metadata-reflection-in-TypeScript-From-Novice-to-Expert-Part-IV/">装饰器Decorators & metadata reflection in TypeScript: From Novice to Expert (Part IV)</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/09/03/%E8%A3%85%E9%A5%B0%E5%99%A8Decorators-metadata-reflection-in-TypeScript-From-Novice-to-Expert-Part-II/">装饰器Decorators & metadata reflection in TypeScript: From Novice to Expert (Part II)</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2021/09/06/%E8%A3%85%E9%A5%B0%E5%99%A8Decorators-metadata-reflection-in-TypeScript-From-Novice-to-Expert-Part-III/">http://catzillaorz.github.io/2021/09/06/%E8%A3%85%E9%A5%B0%E5%99%A8Decorators-metadata-reflection-in-TypeScript-From-Novice-to-Expert-Part-III/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      Flutter开发环境搭建-踩坑指南 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Flutter开发环境搭建-踩坑指南"><span class="toc-text">Flutter开发环境搭建-踩坑指南</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Get-started-install"><span class="toc-text">Get started: install</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Finally"><span class="toc-text">Finally</span></a>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Flutter开发环境搭建-踩坑指南</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2019/09/16</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Frontend">Frontend</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Flutter">Flutter</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <h5 id="Flutter开发环境搭建-踩坑指南"><a href="#Flutter开发环境搭建-踩坑指南" class="headerlink" title="Flutter开发环境搭建-踩坑指南"></a>Flutter开发环境搭建-踩坑指南</h5><a id="more"></a>
+<p><img src="https://pub.dartlang.org/static/img/flutter-packages.png" alt="logo"></p>
+<ul>
+<li><p>相信有不少同学，一开始就被环境搭建恶心到，从而放弃。或者开始抱怨各种坑多，不愿再尝试。</p>
+</li>
+<li><p>很多同学可能看了太多关于Flutter的文章，都很想上手，但大多数都死在了搭建环境这一步。没关系，今天就来点不一样的，带你们从0开始，搭建你的Flutter环境。</p>
+</li>
+<li><p>这种文章本来没有必要出，但既然坑都踩了，方便大家搜索快速定位问题，就特意记录下各种深坑，也是为了方便大家快速定位解决问题，欢迎大家围观。</p>
+</li>
+</ul>
+<h5 id="Get-started-install"><a href="#Get-started-install" class="headerlink" title="Get started: install"></a>Get started: install</h5><ol>
+<li><p><a href="https://flutter.io/get-started/install/" target="_blank" rel="noopener">各个操作平台需要下载的Flutter</a></p>
+<ul>
+<li>坑位<ol>
+<li>打不开（你懂的）</li>
+<li>环境配置</li>
+<li>下完了，该干啥</li>
+<li>选择编辑器<!-- more --></li>
+</ol>
+</li>
+<li>填坑<ol>
+<li>此处可能需要科学上网<code>提醒: 中国的开发者们，请先看一下这篇</code> <a href="https://github.com/flutter/flutter/wiki/Using-Flutter-in-China" target="_blank" rel="noopener">wiki</a>，<code>查看是否需要对网络环境进行特别设置</code>。需要注意的是，其实这一步才是死的人最多的吧。后面大段描述下各种深坑。</li>
+<li>此处的坑，可能就是一劳永逸的命令行环境变量配置，Mac例子： <code>open .bash_profile</code>点到为止。</li>
+<li>甩出中文社区教程：<a href="https://codelabs.flutter-io.cn/codelabs/first-flutter-app-pt1-cn/index.html#1" target="_blank" rel="noopener">编写你的第一个 Flutter App</a></li>
+<li>编辑器当然选择<strong>vs code</strong>，谁用谁知道，<a href="https://flutter.io/get-started/editor/#vscode" target="_blank" rel="noopener">Configure Editor</a>请跟随教程指引，下载安装vs code 所需要的<strong>插件</strong>。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Install on macOS</p>
+<ul>
+<li>甩出官网安装指南 <a href="https://flutter.io/setup-macos/" target="_blank" rel="noopener">macOS</a></li>
+</ul>
+<ol>
+<li>全文一开头就告诉你要用到的一些东西和命令。(以下都是命令行操作，跟着教程敲就可以)</li>
+<li>他建议你安装在 ~/development</li>
+<li>他建议你下载成功后设置PATH，这块是零时的，你可以试着玩一下，后面直接在 cd ~ 后键入<code>open .bash_profile</code>打开后，把你这段 <code>export PATH=~/development/flutter/bin:$PATH</code>加入， 这块的 <code>~/development/flutter/bin</code>这段就是你解压后的真实路径，很好找吧？除非你忘了你解压到哪里了- -！</li>
+<li>如果。以上几步你都顺利完成了，接下来键入 <code>flutter doctor</code>检查下你还缺少哪些，然后痛苦的install各种失败在向你招手…(后面继续讲，是哪些错误)</li>
+</ol>
+</li>
+<li><p>You need a doctor</p>
+<ul>
+<li><p>好不容易Flutter也下载好了，环境PATH也设置好啦，doctor，接着说，同学，你的Flutter还需要治疗。然后抛出以下体检结果：</p>
+</li>
+<li><p>For example:</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">Doctor summary (to see all details, run flutter doctor -v):<br>[✓] Flutter (Channel beta, v0.5.1, on Mac OS X 10.13.6 17G65, locale zh-Hans-CN)<br>[!] Android toolchain - develop <span class="hljs-keyword">for</span> Android devices<br>    ✗ Android SDK is missing <span class="hljs-built_in">command</span> line tools; download from https://goo.gl/XxQghQ<br>[!] iOS toolchain - develop <span class="hljs-keyword">for</span> iOS devices<br>✗ Xcode installation is incomplete; a full installation is necessary <span class="hljs-keyword">for</span> iOS development.<br>Download at: https://developer.apple.com/xcode/download/<br>Or install Xcode via the App Store.<br>Once installed, run:<br>    sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer<br>✗ ideviceinstaller is not installed; this is used to discover connected iOS devices.<br>To install, run:<br>    brew install --HEAD libimobiledevice<br>    brew install ideviceinstaller<br>✗ ios-deploy not installed. To install:<br>    brew install ios-deploy<br>✗ CocoaPods not installed. CocoaPods is used to retrieve the iOS platform side<span class="hljs-string">'s plugin code that your plugin usage on the Dart side.Without resolving iOS dependencies with CocoaPods, plugins will not work on iOS. For more info, see https://flutter.io/platform-plugins To install: brew install cocoapods pod setup</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>好在，不管你遇到什么，医生都会告诉你如何用指令安装:</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">brew update<br>brew install --HEAD libimobiledevice<br>brew install ideviceinstaller ios-deploy cocoapods<br>pod setup<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>你就每次按医生说的下载就行了。</li>
+<li>如果你以为能一帆风顺那你就大错特错了…</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Error:</p>
+<ul>
+<li><p>大多数时候会报这个错：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">remote: Counting objects: 8152, <span class="hljs-keyword">done</span>.<br>remote: Compressing objects: 100% (5441/5441), <span class="hljs-keyword">done</span>.<br>error: RPC failed; curl 18 transfer closed with outstanding <span class="hljs-built_in">read</span> data remaining<br>fatal: The remote end hung up unexpectedly<br>fatal: early EOF<br>fatal: index-pack failed<br>Error: Failed to download resource <span class="hljs-string">"libimobiledevice"</span><br>Failure <span class="hljs-keyword">while</span> executing; `git <span class="hljs-built_in">clone</span> --branch master https://git.libimobiledevice.org/libimobiledevice.git /Users/~/Library/Caches/Homebrew/libimobiledevice--git` exited with 128.<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>心里一万只神兽喷涌而过。下载100% done ？ 然后跟我报错？</p>
+</li>
+<li><p>丢出各种搜索到的issue：</p>
+<ol>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/7025" target="_blank" rel="noopener">error: RPC failed; curl 56 OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 54</a></li>
+<li><a href="https://www.jianshu.com/p/63ad42949061" target="_blank" rel="noopener">error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54 fatal: The remote end hung up unexpectedly fatal: early EOF fatal: index-pack failed</a></li>
+<li><a href="https://www.jianshu.com/p/803df93e84ad" target="_blank" rel="noopener">RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54</a></li>
+</ol>
+</li>
+<li><p>偶尔出现这种错：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">Updating Homebrew...<br>==&gt; Cloning https://git.libimobiledevice.org/libimobiledevice.git<br>Cloning into <span class="hljs-string">'/Users/~/Library/Caches/Homebrew/libimobiledevice--git'</span>...<br>remote: Counting objects: 8152, <span class="hljs-keyword">done</span>.<br>remote: Compressing objects: 100% (5441/5441), <span class="hljs-keyword">done</span>.<br>error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54<br>fatal: The remote end hung up unexpectedly<br>fatal: early EOF<br>fatal: index-pack failed<br>Error: Failed to download resource <span class="hljs-string">"libimobiledevice"</span><br>Failure <span class="hljs-keyword">while</span> executing; `git <span class="hljs-built_in">clone</span> --branch master https://git.libimobiledevice.org/libimobiledevice.git /Users/~/Library/Caches/Homebrew/libimobiledevice--git` exited with 128.<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><a href="https://github.com/lanlin/notes/issues/41" target="_blank" rel="noopener">git error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54</a></li>
+<li><a href="https://blog.csdn.net/IT_liuchengli/article/details/77040806" target="_blank" rel="noopener">RPC failed; curl 18 transfer closed with outstanding read data remaining</a></li>
+</ol>
+</li>
+<li><p>You need calm down</p>
+<ul>
+<li><p>以上错误，不知说你一定会遇到，只是有可能会遇到。</p>
+</li>
+<li><p>也不是特指以上issue里的某个依赖代码，拉取代码失败，因为你可能在不同的情况遇到类似的问题。</p>
+</li>
+<li><p>所以，答案也许就在上面这些链接中，但这里也会给你一些建议，若遇到类似报错，不妨尝试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">git config http.postBuffer 524288000<br>git config https.postBuffer 524288000<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>如果你试了以上办法真的，还是下载失败。最后的秘诀当然不是，重启电脑，应该是<code>多试几次</code></p>
+</li>
+<li><p><strong>多试几次</strong></p>
+</li>
+<li><p><strong>多试几次</strong></p>
+</li>
+<li><p><strong>多试几次</strong><br>- 意思就是<strong>多执行几次</strong> brew install让他多去 pull 几次 github的 master</p>
+</li>
+<li><p>为什么不是 pip 或者 ruby，因为真的没遇到过这俩个出问题，几乎都是brew</p>
+</li>
+<li><p>说了那么多，最后还是在执行了 <code>brew install --HEAD libimobiledevice</code> 13次？还是23次，后终于自动成功了。ᔪ(⁰́◊⁰̀)ᔭ OMG</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><ol>
+<li>这里提到的只是印象比较深刻的一些，你会发现很多类似的issue里很多人都遇到了此类问题，然而每个人都解决方法也不同。你会发现，有些issue依然开着，下面都回复也是络绎不绝。所以，不放弃，才是最后的解决方案，加油。</li>
+<li>看到这里，真是被现实打败了。 光是环境就把人折磨的精疲力尽。但是，如果，这道坎你都过了，那后面还不是水到渠成的事吗！（逃</li>
+<li>后续还会继续更新，共勉</li>
+<li><a href="https://flutter-io.cn/#section-codelabs" target="_blank" rel="noopener">Flutter官网教程</a></li>
+<li><a href="https://flutterchina.club/" target="_blank" rel="noopener">Flutter中文网</a></li>
+</ol>
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2019/09/17/%E7%BF%BB%E5%A2%99/">翻墙</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2019/09/11/quotes/">Quotes</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2019/09/16/Flutter%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/">http://catzillaorz.github.io/2019/09/16/Flutter%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

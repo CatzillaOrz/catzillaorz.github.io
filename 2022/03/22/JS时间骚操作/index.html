@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      JS时间骚操作 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#JS中的时间骚操作知道少-Don’t-Panic"><span class="toc-text">JS中的时间骚操作知道少 Don’t Panic</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Date-prototype-toLocaleDateString"><span class="toc-text">Date.prototype.toLocaleDateString()</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#更多"><span class="toc-text">更多</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">JS时间骚操作</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2022/03/22</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Frontend">Frontend</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/JS">JS</a>
+                  
+                
+                  
+                    <a href="/tags/Date">Date</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="JS中的时间骚操作知道少-Don’t-Panic">JS中的时间骚操作知道少 Don’t Panic<a class="post-anchor" href="#JS中的时间骚操作知道少-Don’t-Panic"></a></h5><p>（以当前日期new Date()为例。也可以将例中new Date()换成任意Date对象）</p>
+<ul>
+<li>获取今天的0时0分0秒（常用于开始日期的获取）</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> startDate= <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString()); <span class="hljs-comment">//Tue May 15 2018 00:00:00 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>获取一个月前的日期</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> lastM =<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().setMonth(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getMonth()<span class="hljs-number">-1</span>));<span class="hljs-comment">//Sun Apr 15 2018 09:18:08 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>获取一个月前的0时0分0秒</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> lastM_start =<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString()).setMonth(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getMonth()<span class="hljs-number">-1</span>));<br><span class="hljs-comment">//Sun Apr 15 2018 00:00:00 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>获取前一天的日期</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> yesterday = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().setDate(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getDate()<span class="hljs-number">-1</span>));<span class="hljs-comment">//Mon May 14 2018 09:26:39 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>获取今天的23时59分59秒</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> endDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString()).getTime()+<span class="hljs-number">24</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">1000</span><span class="hljs-number">-1</span>);<br><span class="hljs-comment">//Tue May 15 2018 23:59:59 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>获取昨天的23时59分59秒</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> yes_endDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().setDate(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getDate()<span class="hljs-number">-1</span>)).toLocaleDateString()).getTime()+<span class="hljs-number">24</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">1000</span><span class="hljs-number">-1</span>);<br><span class="hljs-comment">//Mon May 14 2018 23:59:59 GMT+0800 (中国标准时间)</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>实现Date的Format方法</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 对Date的扩展，将 Date 转化为指定格式的String</span><br><span class="hljs-comment">// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，</span><br><span class="hljs-comment">// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)</span><br><span class="hljs-comment">// 例子：</span><br><span class="hljs-comment">// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423</span><br><span class="hljs-comment">// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18</span><br><span class="hljs-built_in">Date</span>.prototype.Format = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fmt</span>)</span><br><span class="hljs-function"></span>{ <span class="hljs-comment">//author: meizz</span><br>  <span class="hljs-keyword">var</span> o = {<br>    <span class="hljs-string">"M+"</span> : <span class="hljs-keyword">this</span>.getMonth()+<span class="hljs-number">1</span>,                 <span class="hljs-comment">//月份</span><br>    <span class="hljs-string">"d+"</span> : <span class="hljs-keyword">this</span>.getDate(),                    <span class="hljs-comment">//日</span><br>    <span class="hljs-string">"h+"</span> : <span class="hljs-keyword">this</span>.getHours(),                   <span class="hljs-comment">//小时</span><br>    <span class="hljs-string">"m+"</span> : <span class="hljs-keyword">this</span>.getMinutes(),                 <span class="hljs-comment">//分</span><br>    <span class="hljs-string">"s+"</span> : <span class="hljs-keyword">this</span>.getSeconds(),                 <span class="hljs-comment">//秒</span><br>    <span class="hljs-string">"q+"</span> : <span class="hljs-built_in">Math</span>.floor((<span class="hljs-keyword">this</span>.getMonth()+<span class="hljs-number">3</span>)/<span class="hljs-number">3</span>), <span class="hljs-comment">//季度</span><br>    <span class="hljs-string">"S"</span>  : <span class="hljs-keyword">this</span>.getMilliseconds()             <span class="hljs-comment">//毫秒</span><br>  };<br>  <span class="hljs-keyword">if</span>(<span class="hljs-regexp">/(y+)/</span>.test(fmt))<br>    fmt=fmt.replace(<span class="hljs-built_in">RegExp</span>.$<span class="hljs-number">1</span>, (<span class="hljs-keyword">this</span>.getFullYear()+<span class="hljs-string">""</span>).substr(<span class="hljs-number">4</span> - <span class="hljs-built_in">RegExp</span>.$<span class="hljs-number">1.</span>length));<br>  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> o)<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"("</span>+ k +<span class="hljs-string">")"</span>).test(fmt))<br>  fmt = fmt.replace(<span class="hljs-built_in">RegExp</span>.$<span class="hljs-number">1</span>, (<span class="hljs-built_in">RegExp</span>.$<span class="hljs-number">1.</span>length==<span class="hljs-number">1</span>) ? (o[k]) : ((<span class="hljs-string">"00"</span>+ o[k]).substr((<span class="hljs-string">""</span>+ o[k]).length)));<br>  <span class="hljs-keyword">return</span> fmt;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<hr>
+<ul>
+<li>JavaScript toLocaleString() 方法</li>
+</ul>
+<p>定义和用法<br>toLocaleString() 方法可根据本地时间把 Date 对象转换为字符串，并返回结果。</p>
+<p>返回值<br>dateObject 的字符串表示，以<strong>本地时间区</strong>表示，并根据本地规则格式化。</p>
+<ul>
+<li>注意：</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-built_in">Date</span>.UTC(<span class="hljs-number">2012</span>, <span class="hljs-number">11</span>, <span class="hljs-number">20</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));<br><br><span class="hljs-comment">//假定本地时区是 America/Los_Angeles(美国时区)</span><br><span class="hljs-comment">//en-US(美利坚英语)使用 month-day-year 的顺序展示年月日</span><br>alert(date.toLocaleString(<span class="hljs-string">"en-US"</span>));<br><span class="hljs-comment">// → "12/19/2012, 7:00:00 PM"</span><br><br><span class="hljs-comment">// en-GB(不列颠英语)使用 day-month-year 顺序展示年月日</span><br>alert(date.toLocaleString(<span class="hljs-string">"en-GB"</span>));<br><span class="hljs-comment">// → "20/12/2012 03:00:00"</span><br><br><span class="hljs-comment">// 韩语使用 year-month-day 顺序展示年月日</span><br>alert(date.toLocaleString(<span class="hljs-string">"ko-KR"</span>));<br><span class="hljs-comment">// → "2012. 12. 20. 오후 12:00:00"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>该方法时区不同，所得到的年月会不同。配合Date.getTime()获得的（返回 1970 年 1 月 1 日至今的毫秒数。）也会发生巨大变化；</li>
+</ul>
+<h5 id="Date-prototype-toLocaleDateString">Date.prototype.toLocaleDateString()<a class="post-anchor" href="#Date-prototype-toLocaleDateString"></a></h5><ul>
+<li><p>Date 实例转为表示本地时间的字符串，有常见三种方法</p>
+<ul>
+<li>Date.prototype.toLocaleString()：完整的本地时间。</li>
+<li>Date.prototype.toLocaleDateString()：本地日期（不含小时、分和秒）。</li>
+<li>Date.prototype.toLocaleTimeString()：本地时间（不含年月日）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleTimeString() <span class="hljs-comment">// "下午12:26:15"</span><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString() <span class="hljs-comment">// "2020/10/18"</span><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleString() <span class="hljs-comment">// "2020/10/18 下午12:26:24"</span><br><span class="hljs-comment">// 转为zh-CN中国本地24小时时间：</span><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(e.createdTime).toLocaleString(<span class="hljs-string">'zh-CN'</span>, { <span class="hljs-attr">hour12</span>: <span class="hljs-literal">false</span> });<br></code></pre></td></tr></tbody></table></figure>
+
+<h6 id="更多">更多<a class="post-anchor" href="#更多"></a></h6><p><a href="https://juejin.cn/post/6884819810476097550" target="_blank" rel="noopener">显示日期+显示星期+显示不同地区语言</a></p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//日期</span><br><p>{{formatDate(<span class="hljs-string">'2020/10/18'</span>)}}<<span class="hljs-regexp">/p></span><br><span class="hljs-regexp">formatDate(date) {</span><br><span class="hljs-regexp">     const options = { year: 'numeric', month: 'long', day: 'numeric' }</span><br><span class="hljs-regexp">     return new Date(date).toLocaleDateString('zh-CN', options)</span><br><span class="hljs-regexp">}</span><br><span class="hljs-regexp">/</span><span class="hljs-regexp">/结果: 2020年10月18日</span><br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Week</span><br><p>{{formatDate(<span class="hljs-string">'2020/10/18'</span>)}}<<span class="hljs-regexp">/p></span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">formatDate(date) {</span><br><span class="hljs-regexp">     const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }</span><br><span class="hljs-regexp">     return new Date(date).toLocaleDateString('zh-CN', options)</span><br><span class="hljs-regexp">}</span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">/</span><span class="hljs-regexp">/结果: 2020年10月18日星期日</span><br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><p>{{formatDate(<span class="hljs-string">'2020/10/18'</span>)}}<<span class="hljs-regexp">/p></span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">formatDate(date) {</span><br><span class="hljs-regexp">     const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }</span><br><span class="hljs-regexp">     return new Date(date).toLocaleDateString('en-US', options)</span><br><span class="hljs-regexp">}</span><br><span class="hljs-regexp">/</span><span class="hljs-regexp">/ 结果: Sunday, October 18, 2020</span><br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><p>{{formatDate(<span class="hljs-string">'2020/10/18'</span>)}}<<span class="hljs-regexp">/p></span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">formatDate(date) {</span><br><span class="hljs-regexp">     const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }</span><br><span class="hljs-regexp">     return new Date(date).toLocaleDateString('en-US', options)</span><br><span class="hljs-regexp">}</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>options</p>
+<ul>
+<li>dateStyle：可能的值为full、long、medium、short。</li>
+<li>timeStyle：可能的值为full、long、medium、short。</li>
+<li>month：可能的值为numeric、2-digit、long、short、narrow。</li>
+<li>year：可能的值为numeric、2-digit。</li>
+<li>weekday：可能的值为long、short、narrow。</li>
+<li>day、hour、minute、second：可能的值为numeric、2-digit。</li>
+<li>timeZone：可能的值为 IANA 的时区数据库。</li>
+<li>timeZooneName：可能的值为long、short。</li>
+<li>hour12：24小时周期还是12小时周期，可能的值为true、false</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js">  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleDateString(<span class="hljs-string">'zh-CN'</span>, {<br>  weekday: <span class="hljs-string">'long'</span>,<br>  year: <span class="hljs-string">'numeric'</span>,<br>  month: <span class="hljs-string">'long'</span>,<br>  day: <span class="hljs-string">'numeric'</span><br>})<br><span class="hljs-comment">// "2020年10月18日星期日"</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleTimeString(<span class="hljs-string">'zh-CN'</span>, {<br>  timeZone: <span class="hljs-string">'Asia/Shanghai'</span>,<br>  hour12: <span class="hljs-literal">false</span>,<br>  timeZoneName: <span class="hljs-string">'long'</span><br>})<br><span class="hljs-comment">// "中国标准时间 12:20:18"</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toLocaleTimeString(<span class="hljs-string">'zh-CN'</span>, {<br>  timeZone: <span class="hljs-string">'Asia/Shanghai'</span>,<br>  hour12: <span class="hljs-literal">true</span>,<br>  day: <span class="hljs-string">'numeric'</span><br>})<br><span class="hljs-comment">// "18日 下午12:21:29"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><a href="https://juejin.cn/post/6884819810476097550" target="_blank" rel="noopener">扩展+分割+显示不同单位如美元人民币+控制小数位</a></p>
+<ul>
+<li>分割</li>
+</ul>
+<p>在Number的原型上也有这个方法toLocaleString,即Number.prototype.toLocaleString()</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> price = <span class="hljs-number">12345678</span>;<br>price.toLocaleString(); <span class="hljs-comment">// => "12,345,678"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>currency 单位列表，查看</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> price = <span class="hljs-number">2499</span>;<br>price.toLocaleString(<span class="hljs-string">'zh-CN'</span>, {<br>  style: <span class="hljs-string">'currency'</span>,<br>  currency: <span class="hljs-string">'RMB'</span><br>});<br><span class="hljs-comment">// "RMB 2,499.00"</span><br><br><span class="hljs-keyword">var</span> price = <span class="hljs-number">2499</span>;<br>price.toLocaleString(<span class="hljs-string">'zh-CN'</span>, {<br>  style: <span class="hljs-string">'currency'</span>,<br>  currency: <span class="hljs-string">'USD'</span><br>});<br><span class="hljs-comment">// "US$2,499.00"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>控制小数位</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> price = <span class="hljs-number">2499</span>;<br>price.toLocaleString(<span class="hljs-string">'zh-CN'</span>, {<br>  style: <span class="hljs-string">'currency'</span>,<br>  currency: <span class="hljs-string">'KNS'</span>,<br>  minimumFractionDigits:<span class="hljs-number">3</span><br>});<br><span class="hljs-comment">// "KNS 2,499.000"</span><br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>angular date  pipe</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag"><<span class="hljs-name">td</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let col of columns"</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">"col.field"</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">div</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"'create_time'"</span>></span>{{ rowData[col.field] | date: 'yyyy-MM-dd HH:mm:ss':'GMT+08:00' }}<span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">div</span> *<span class="hljs-attr">ngSwitchDefault</span>></span>{{ rowData[col.field] }}<span class="hljs-tag"></<span class="hljs-name">div</span>></span><br><span class="hljs-tag"></<span class="hljs-name">td</span>></span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>– 当然，服务器可能会设置不是zh-CN这时就需要转换时区</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// value = '2020-02-23 13:33:44' 此处输入format时间省略了后面1000毫秒之内的数字</span><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(value).toLocaleString(<span class="hljs-string">"en-US"</span>)).getTime();<br><span class="hljs-comment">// 注意服务器可能还有 1000 毫秒被省略，查询时还要加条件</span><br><span class="hljs-keyword">this</span>.filter.time ? <span class="hljs-string">`[<span class="hljs-subst">${<span class="hljs-keyword">this</span>.filter.time}</span>,<span class="hljs-subst">${<span class="hljs-keyword">this</span>.filter.time + <span class="hljs-number">1000</span>}</span>]`</span> : <span class="hljs-string">''</span><br></code></pre></td></tr></tbody></table></figure>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2022/08/05/Just-In-Time-Compilation-of-Javascript/">Just-In-Time Compilation of Javascript</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/09/07/Arizona-State-University-MAT170-functions-In-exam/">Arizona State University MAT170 functions In exam</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2022/03/22/JS%E6%97%B6%E9%97%B4%E9%AA%9A%E6%93%8D%E4%BD%9C/">http://catzillaorz.github.io/2022/03/22/JS%E6%97%B6%E9%97%B4%E9%AA%9A%E6%93%8D%E4%BD%9C/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

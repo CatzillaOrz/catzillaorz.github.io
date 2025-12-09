@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      Loop in node - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#for循环调用耗尽内存"><span class="toc-text">for循环调用耗尽内存</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#async-forever"><span class="toc-text">async.forever(</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#setInterval"><span class="toc-text">setInterval</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#The-Moral"><span class="toc-text">The Moral</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#最受欢迎的方式-async-await"><span class="toc-text">最受欢迎的方式-async&#x2F;await</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#read-more"><span class="toc-text">read more</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Loop in node</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/05/26</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/node">node</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/loop">loop</a>
+                  
+                
+                  
+                    <a href="/tags/node">node</a>
+                  
+                
+                  
+                    <a href="/tags/async">async</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h5 id="for循环调用耗尽内存">for循环调用耗尽内存<a class="post-anchor" href="#for循环调用耗尽内存"></a></h5><ul>
+<li>The Story</li>
+</ul>
+<p>Here’s how it started: two weeks ago I was writing a web scraper for thepiratebay. My idea was simple: I wanted to get a JSON dump of all torrent information available, so that I could later use it for some simple data analysis.</p>
+<p>After taking a look at the site, I realized that the simplest way to scrape all the existing torrents would be to just loop through all integers, querying each one sequentially – this is because TPB allows you to access torrents via their integer ID (which is always increasing):</p>
+<ul>
+<li><a href="http://thepiratebay.se/torrent/1" target="_blank" rel="noopener">http://thepiratebay.se/torrent/1</a></li>
+<li><a href="http://thepiratebay.se/torrent/2" target="_blank" rel="noopener">http://thepiratebay.se/torrent/2</a></li>
+<li><a href="http://thepiratebay.se/torrent/3" target="_blank" rel="noopener">http://thepiratebay.se/torrent/3</a></li>
+<li><a href="http://thepiratebay.se/torrent/..." target="_blank" rel="noopener">http://thepiratebay.se/torrent/…</a></li>
+</ul>
+<p>The rules are simple: if you get a 404 skip it – if you get a 200, the torrent exists and can be scraped!</p>
+<p>So, I sat down and wrote a first version that looked something like this:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">10000000</span>; i++) {<br>  request(<span class="hljs-string">'http://thepiratebay.se/'</span> + i, ...);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>This is some pretty basic stuff:<ul>
+<li><input checked disabled type="checkbox"> Iterate through numbers? CHECK!</li>
+<li><input checked disabled type="checkbox"> Make HTTP requests? CHECK!</li>
+</ul>
+</li>
+</ul>
+<p>But to my dismay, after running for a few minutes I noticed that this small program was eating all the RAM on my laptop! But why?!</p>
+<p>I realized that Node.js blocks when running blocking code (eg: a for loop) – but I figured that since I was making async requests from within things would continue to work normally.</p>
+<p>I was wrong.</p>
+<p>So, being confused about what was happening, I decided to dig a bit deeper. I narrowed my case down to a simpler test:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">10000000</span>; i++) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'hi:'</span>, i);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="async-forever">async.forever(<a class="post-anchor" href="#async-forever"></a></h5><p>But alas, the same problem. The program simply runs for a few minutes, then crashes as it uses all the RAM on my computer. Bummer.</p>
+<p>So then I started Googling around to find potential solutions. Surely this must be a common issue?</p>
+<p>Unfortunately, however, I didn’t see much discussion about this, and all the relevant Stack Overflow threads proposed solutions that didn’t require looping at all (not an option in my case).</p>
+<p>Next, I turned to async – the really popular flow control library for Node. After looking through the docs, I realized there was something that was seemingly perfect for this! The forever construct!</p>
+<p>So I then tried the following:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">async</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'async'</span>);<br><br><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">async</span>.forever(<br>  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">next</span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'hi:'</span>, i);<br>    i++;<br>    next();<br>  },<br>  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'All done!'</span>);<br>  }<br>);<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="setInterval">setInterval<a class="post-anchor" href="#setInterval"></a></h5><p>But again – the same issue. After a few thousand loops: crash.</p>
+<p>After writing quite a few different iterations of this simple program, and a significant amount of lost sleep (I can’t really sleep well knowing I don’t understand something – grr) – my coworker Robert proposed a working solution:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><br><span class="hljs-keyword">var</span> Abstraction = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">this</span>.index = <span class="hljs-number">-1</span>;<br>};<br><br>Abstraction.prototype.getIndex = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">this</span>.index++;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.index;<br>};<br><br>Abstraction.prototype.isDoneTest = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isDoneTest</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.index > <span class="hljs-number">10000000</span>;<br>};<br><br><span class="hljs-keyword">var</span> list = <span class="hljs-keyword">new</span> Abstraction();<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iterator</span>(<span class="hljs-params"></span>)</span>{<br>  <span class="hljs-keyword">var</span> i = list.getIndex();<br>  <span class="hljs-built_in">console</span>.log(i);<br>  <span class="hljs-keyword">if</span>(list.isDoneTest()){<br>    clearInterval(interval);<br>  }<br>}<br><br><span class="hljs-keyword">var</span> interval = setInterval(iterator,<span class="hljs-number">1</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Brilliant! I didn’t even think of setInterval for some reason.</p>
+<p>Anyhow: after a lot of discussion – we both came to the agreement that using setInterval is essentially the only way to solve this problem.</p>
+<p>After thinking about this some more, I decided to write a small abstraction layer to handle this – so I created lupus.</p>
+<p>lupus provides simple (albeit, basic) asynchronous looping for Node.js:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> lupus = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lupus'</span>);<br><br>lupus(<span class="hljs-number">0</span>, <span class="hljs-number">10000000</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">n</span>) </span>{<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"We're on:"</span>, n);<br>}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'All done!'</span>);<br>});<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Whatever you end up writing inside of the loop (blocking or not) – lupus doesn’t care.</p>
+<h6 id="The-Moral">The Moral<a class="post-anchor" href="#The-Moral"></a></h6><p>Performing asynchronous for loops in Node.js turned out to be quite a lot harder than I expected. I find it odd that it’s so easy to crash my programs with the simplest of looping examples.</p>
+<p>Oh well! Live and learn!</p>
+<p>PS: If you read this far, you might want to follow me on twitter or github and subscribe via RSS or email below (I’ll email you new articles when I publish them).</p>
+<h4 id="最受欢迎的方式-async-await">最受欢迎的方式-async/await<a class="post-anchor" href="#最受欢迎的方式-async-await"></a></h4><p>A Better Way: Async/Await</p>
+<p>The async/await keywords are a wonderful mechanism for modeling asynchronous control-flow in computer programs. In JavaScript, these keywords are syntactic sugar on top of Promises–they abstract away the calls to Promise.then. In the following code, we refactor the getFishAndChips function to use async/await.</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// We have to get chips after we get fish...</span><br><span class="hljs-keyword">async</span> getFishAndChips() {<br>    <span class="hljs-keyword">const</span> fish = <span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">this</span>.fishApiUrl).then(<span class="hljs-function"><span class="hljs-params">response</span> =></span> response.json());<br>    <span class="hljs-keyword">this</span>.fish = fish;<br><br>    <span class="hljs-keyword">const</span> fishIds = fish.map(<span class="hljs-function"><span class="hljs-params">fish</span> =></span> fish.id),<br>      chipReqOpts = { <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ fishIds }) };<br><br>    <span class="hljs-keyword">const</span> chips = <span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">this</span>.chipsApiUrl, chipReqOpts).then(<span class="hljs-function"><span class="hljs-params">response</span> =></span> response.json());<br>    <span class="hljs-keyword">this</span>.chips = chips;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h5 id="read-more">read more<a class="post-anchor" href="#read-more"></a></h5><ul>
+<li>Naive Approach</li>
+</ul>
+<p>Your first instinct when using fetch might be to do something like this:</p>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">// my-component.jsx</span><br><br><span class="hljs-comment">// We have to get chips after we get fish...</span><br>getFishAndChips() {<br>    fetch(<span class="hljs-keyword">this</span>.fishApiUrl) <span class="hljs-comment">// Request fish species</span><br>        .then(<span class="hljs-function"><span class="hljs-params">fishRes</span> =></span> {<br>            fishRes.json().then(<span class="hljs-function"><span class="hljs-params">fish</span> =></span> {<br>                <span class="hljs-keyword">this</span>.fish = fish;<br><br>                <span class="hljs-keyword">const</span> fishIds = fish.map(<span class="hljs-function"><span class="hljs-params">fish</span> =></span> fish.id);<br><br>                fetch( <span class="hljs-comment">// Request chips using fish ids</span><br>                        <span class="hljs-keyword">this</span>.chipsApiUrl,<br>                        {<br>                            method: <span class="hljs-string">'POST'</span>,<br>                            body: <span class="hljs-built_in">JSON</span>.stringify({ fishIds })<br>                        }<br>                    )<br>                    .then(<span class="hljs-function"><span class="hljs-params">chipsRes</span> =></span> {<br>                        chipsRes.json().then(<span class="hljs-function"><span class="hljs-params">chips</span> =></span> {<br>                            <span class="hljs-keyword">this</span>.chips = chips;<br>                        })<br>                    })<br>            })<br>        })<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>In the above code, we are nesting two fetch calls in order to ensure that we request our chips after we request our fish. This is because, in order to request chips, we need to send an array of fish IDs with the POST request. This works, however, there is a big readability problem here. It is possible to reduce the amount of code needed for this feature dramatically. Let’s take a look at Promise chaining!</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/05/31/%E4%BD%BF%E5%91%BD%E5%BF%85%E8%BE%BE%E5%AD%A6%E8%8B%B1%E8%AF%AD%E2%80%94%E2%80%94%E5%BA%8F%E8%A8%80/">使命必达学英语——序言</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/04/01/How-to-Setup-SSH-for-Auto-Login/">How to Setup SSH for Auto Login</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2021/05/26/Loop-in-node/">http://catzillaorz.github.io/2021/05/26/Loop-in-node/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

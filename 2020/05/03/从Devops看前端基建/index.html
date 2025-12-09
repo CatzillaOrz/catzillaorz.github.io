@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> <meta name="google-site-verification" content="_y3PGYn8yfOAyB50FziwyvBRF4_UYE90h2hnzhNl7vs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      从Devops看前端基建 - Catzilla
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#从DevOps流程看前端基建"><span class="toc-text">从DevOps流程看前端基建</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#在团队内-外促进协作"><span class="toc-text">在团队内&#x2F;外促进协作</span></a>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          Home
+        </a>
+        
+        <a href="/archives" class="">
+          Archives
+        </a>
+        
+        <a href="/categories" class="">
+          Categories
+        </a>
+        
+        <a href="/tags" class="">
+          Tags
+        </a>
+        
+        <a href="/gallery" class="">
+          Gallery
+        </a>
+        
+        <a href="/friends" class="">
+          Friends
+        </a>
+        
+        <a href="/about" class="">
+          About
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <div class="author">catzillaorz</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">catzillaorz</div>
+          <a href="/" class="logo" style="background-image: url('//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/avatar2020-05-03.JPG')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            Home
+          </a>
+          
+          <a href="/archives" class="">
+            Archives
+          </a>
+          
+          <a href="/categories" class="">
+            Categories
+          </a>
+          
+          <a href="/tags" class="">
+            Tags
+          </a>
+          
+          <a href="/gallery" class="">
+            Gallery
+          </a>
+          
+          <a href="/friends" class="">
+            Friends
+          </a>
+          
+          <a href="/about" class="">
+            About
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/catzillaorz" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/shi.xiaohu.5" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://www.instagram.com/shi_xiaohu/" target="_block">
+              <span class="iconfont icon-instagram"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">从Devops看前端基建</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/05/03</span>
+        </span>
+
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Frontend">Frontend</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/前端方案">前端方案</a>
+                  
+                
+                  
+                    <a href="/tags/Devops">Devops</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <h6 id="从DevOps流程看前端基建"><a href="#从DevOps流程看前端基建" class="headerlink" title="从DevOps流程看前端基建"></a>从DevOps流程看前端基建</h6><p><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200503151646-2020-05-03.png" alt="20200503151646-2020-05-03"></p>
+<hr>
+<p><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/devops-2020-05-03.png" alt="devops-2020-05-03"></p>
+<hr>
+<p>当你进入一个新团队，前端从 0 开始，怎样从DevOps的角度去提高团队效能呢？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img20200503134221.png" alt="devops流程和工具"></p>
+<p>一套简易的DevOps流程包含了协作、构建、测试、部署、运行。</p>
+<p>而前端常说的开发规范、代码管理、测试、构建部署以及工程化其实都是在这一整个体系中。</p>
+<p>当然，中小团队想玩好DevOps整套流程，需要的时间与研发成本，不比开发项目少。</p>
+<p>DevOps核心思想就是：“快速交付价值，灵活响应变化”。其基本原则如下：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 高效的协作和沟通；</li>
+<li><input disabled="" type="checkbox"> 自动化流程和工具；</li>
+<li><input disabled="" type="checkbox"> 快速敏捷的开发；</li>
+<li><input disabled="" type="checkbox"> 持续交付和部署；</li>
+<li><input disabled="" type="checkbox"> 不断学习和创新;</li>
+</ul>
+<h5 id="在团队内-外促进协作"><a href="#在团队内-外促进协作" class="headerlink" title="在团队内/外促进协作"></a>在团队内/外促进协作</h5><p>前端基建协作方面可以写的东西太多了，暂且粗略分为：团队内 与 团队外。</p>
+<p>以下可能是前端们都能遇到的问题：</p>
+<ul>
+<li>成员间水平各异，编写代码的风格各不相同，项目间难以统一管理。</li>
+<li>不同项目Webpack配置差异过大，基础工具函数库和请求封装不一样。</li>
+<li>项目结构与技术栈上下横跳，明明是同一 UI 风格，基础组件没法复用，全靠复制粘贴。</li>
+<li>代码没注释，项目没文档，新人难以接手，旧项目无法维护。</li>
+</ul>
+<ol>
+<li><p>三层代码规范约束</p>
+<ul>
+<li><p>第一层，ESLint：</p>
+<ul>
+<li>常见的ESLint风格有：airbnb，google，standard。</li>
+<li>在多个项目间，规则不应左右横跳，如果项目周期紧张，可以适当放宽规则，让<code>warning</code>类弱警告可以通过。且一般建议成员的<code>IDE</code>和插件要统一，将客观因素影响降到最低。</li>
+</ul>
+</li>
+<li><p>第二层，Git Hooks</p>
+<ul>
+<li>git 自身包含许多 <code>hooks</code>，在 <code>commit</code>，<code>push</code> 等 git 事件前后触发执行。而<code>husky</code>能够防止不规范代码被<code>commit</code>、<code>push</code>、<code>merge</code>等等。</li>
+<li>代码提交不规范，全组部署两行泪。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">npm install husky pre-commit  --save-dev<br></code></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// package.json</span><br><span class="hljs-string">"scripts"</span>: &#123;<br>    <span class="hljs-comment">// ...</span><br>    <span class="hljs-string">"lint"</span>: <span class="hljs-string">"node_modules/.bin/eslint '**/*.&#123;js,jsx&#125;' &amp;&amp; node_modules/.bin/stylelint '**/*.&#123;css,scss&#125;'"</span>,<br>    <span class="hljs-string">"lint:fix"</span>: <span class="hljs-string">"node_modules/.bin/eslint '**/*.&#123;js,jsx&#125;' --fix &amp;&amp; node_modules/.bin/stylelint '**/*.&#123;css,scss&#125;' --fix"</span><br>&#125;,<br><span class="hljs-string">"husky"</span>: &#123;<br>    <span class="hljs-string">"hooks"</span>: &#123;<br>    <span class="hljs-string">"pre-commit"</span>: <span class="hljs-string">"npm run lint"</span>,<br>    <span class="hljs-string">"commit-msg"</span>: <span class="hljs-string">"commitlint -E HUSKY_GIT_PARAMS"</span><br>    &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<p>通过简单的安装配置，无论你通过命令行还是<code>Sourcetree</code>提交代码，都需要通过严格的校验。</p>
+<p>建议在根目录<code>README.md</code>注明提交规范：</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><code class="hljs md"><span class="hljs-section">## Git 规范</span><br><br>使用 [<span class="hljs-string">commitlint</span>](<span class="hljs-link">https://github.com/conventional-changelog/commitlint</span>) 工具，常用有以下几种类型：<br><br><span class="hljs-bullet">- </span>feat ：新功能<br><span class="hljs-bullet">- </span>fix ：修复 bug<br><span class="hljs-bullet">- </span>chore ：对构建或者辅助工具的更改<br><span class="hljs-bullet">- </span>refactor ：既不是修复 bug 也不是添加新功能的代码更改<br><span class="hljs-bullet">- </span>style ：不影响代码含义的更改 (例如空格、格式化、少了分号)<br><span class="hljs-bullet">- </span>docs ：只是文档的更改<br><span class="hljs-bullet">- </span>perf ：提高性能的代码更改<br><span class="hljs-bullet">- </span>revert ：撤回提交<br><span class="hljs-bullet">- </span>test ：添加或修正测试<br><br>举例<br>git commit -m 'feat: add list'<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>第三层，CI(持续集成)。</p>
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTk4MDA1MA==&mid=2458073414&idx=2&sn=cea7476d1c65f85eb45f38051586eb9e&scene=21#wechat_redirect" target="_blank" rel="noopener">前端代码规范最佳实践</a></p>
+</blockquote>
+<p> 前两步的校验可以手动跳过（找骂），但CI中的校验是绝对绕不过的，因为它在服务端校验。使用 gitlab CI 做持续集成，配置文件 .gitlab-ci.yaml 如下所示:</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js">lint:<br>stage:lint<br>only:<br>    -<span class="hljs-regexp">/^feature\/.*$/</span><br>script:<br>    -npmlint<br></code></pre></td></tr></table></figure>
+
+<p>这层校验，一般在稍大点的企业中，会由运维部的配置组完成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img20200503135413.png" alt="20200503135413"></p>
+</li>
+</ul>
+</li>
+<li><p>统一前端物料</p>
+</li>
+</ol>
+<p>公共组件、公共 UI、工具函数库、第三方 sdk 等该如何规范？</p>
+<ul>
+<li>如何快速封装部门 UI 组件库？</li>
+</ul>
+<p>首先，得感谢各大 UI 组件库的维护者们，给我们省了非常多的开发成本。<br>遥想<code>Jquery</code>时代，到处找插件的日子….<br>但是每个新团队都有自己的 UI 风格取向，你单引一个<code>ElementUI</code>，肯定会出现业务水土不服以及观感不同的地方，而如果你在每个项目都强行魔改，到处污染样式，这得多心累啊。<br>虽然各大组件库都有提供初始化变量的方式，但业务向的组件就没办法了。<br>解决方案之一，就是国外很火的一个开源库：<code>StoryBook</code>:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/20200503140528.png" alt="20200503140528"></p>
+<p>Storybook是一个开源工具，用于独立开发React、Vue和Angular的UI组件。它能有组织和高效地构建 UI 组件。</p>
+<p>Storybook提供了一个沙箱，用于隔离地构建 UI 组件。</p>
+<p>类似于组件库的官方文档，却更加强大。可以通过控件和对出入参数调整，快速查看组件的用法，测试也可以对组件功能完整性等做校验。</p>
+<p>一般的建议步骤是：</p>
+<ol>
+<li>将业务从公共组件中抽离出来。</li>
+<li>在项目中安装StoryBook(多项目时另起)</li>
+<li>按官方文档标准，创建stories，并设定参数（同时也建议先写Jest测试脚本），写上必要的注释。</li>
+<li>为不同组件配置StoryBook控件，最后部署。</li>
+</ol>
+<ul>
+<li>如何统一部门所用的工具函数库和第三方sdk</li>
+</ul>
+<p>其实这里更多的是沟通的问题，首先需要明确的几点：</p>
+<ul>
+<li>部门内对约定俗成的工具库要有提前沟通，不能这头装一个MomentJs，另一头又装了DayJS。一般的原则是：轻量的自己写，超过可接受大小的找替代，譬如:DayJS替代MomentJs，ImmerJS替代immutableJS等。</li>
+<li>部门间的有登录机制，请求库封装协议等。如果是SSO/扫码登录等，就协定只用一套，不允许后端随意变动。如果是请求库封装，就必须要后端统一Restful风格，相信我，不用Restful规范的团队都是灾难。前端连调会生不如死。</li>
+<li>Mock方式、路由管理以及样式写法也应当统一。</li>
+</ul>
+<ol>
+<li>在团队外促进协作</li>
+</ol>
+<ul>
+<li><p>核心原则就是：<strong>“能用文档解决的就尽量别 BB。”</strong><br>虽说现今前端的地位愈发重要，但我们经常在项目开发中遇到以下问题：</p>
+</li>
+<li><p>不同的后端接口规范不一样，前端需要耗费大量时间去做数据清洗兼容。</p>
+</li>
+<li><p>前端静态页开发完了，后端迟迟不给接口，因为没有接口文档，天天都得问。</p>
+</li>
+<li><p>测试反馈的问题，在原型上没有体现。</p>
+</li>
+<li><p>首先是原型方面：</p>
+</li>
+<li><p>一定要看明白产品给的原型文档！！！多问多沟通，这太重要了。</p>
+</li>
+<li><p>好的产品一般都会提供项目流程详图，但前端还是需要基于实际，做一张页面流程图。</p>
+</li>
+<li><p>要产品提供具体字段类型相关定义，不然得和后端扯皮。。。</p>
+</li>
+<li><p>其次是后端：</p>
+<ul>
+<li>执行Restful接口规范，不符合规范的接口驳回。</li>
+<li>必要的接口文档站点与 API 测试（如Swagger，Apidoc），不接受文件传输形式的接口。</li>
+</ul>
+</li>
+<li><p>然后是测试方面：</p>
+<ul>
+<li>为了避免测试提出一些无效的 bug，最好提前参与测试的用例评审。</li>
+<li>在实际开发中，如果有不合理功能需要修改，所有的修改都必须要求产品经理更新到 PRD 以及原型设计中。否则，测试如果不知道的话，会认为是 bug。</li>
+<li>通过自测和编写Jest单元测试，将代码意外bug降到合理程度。</li>
+<li>和测试一起吐槽后端的接口规范（滑稽）。</li>
+</ul>
+</li>
+<li><p>最后是运维方面：</p>
+<ul>
+<li>除了CI/CD相关的，其实很可以和运维一起写写nginx和插件开发。</li>
+</ul>
+</li>
+</ul>
+
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/alipay2020-05-03.jpeg')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="//cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg" target="_block" class="bg" style="background-image:url('///cdn.jsdelivr.net/gh/catzillaorz/imgcdn/vsc_img/wxpay2020-05-03.jpeg')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/05/10/Github-VSC%EF%BC%8C%E8%AE%A9Markdown%E8%B5%B7%E9%A3%9E/">Github免费图床+VSC，让Markdown起飞</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/04/30/%E5%89%8D%E7%AB%AF%E9%9B%86%E6%88%90keycloak-Express-Keycloak/">前端集成keycloak-Express+Keycloak</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="http://catzillaorz.github.io">catzillaorz</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="http://catzillaorz.github.io/2020/05/03/%E4%BB%8EDevops%E7%9C%8B%E5%89%8D%E7%AB%AF%E5%9F%BA%E5%BB%BA/">http://catzillaorz.github.io/2020/05/03/%E4%BB%8EDevops%E7%9C%8B%E5%89%8D%E7%AB%AF%E5%9F%BA%E5%BB%BA/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="http://catzillaorz.github.io">catzillaorz</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2025
+            <a href="http://catzillaorz.github.io">catzillaorz</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
